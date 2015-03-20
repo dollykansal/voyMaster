@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+          xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
+          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
+          id="WebApp_ID" version="2.5">
+  <display-name>voyage</display-name>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+			classpath:*.xml
+		</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  <!-- <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter> -->
+ <!--  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping> -->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:mvc-context.xml</param-value>
+    </init-param>
+    <init-param> 
+      <param-name>cacheControl</param-name> 
+      <param-value>max-age=3600,public</param-value> 
+    </init-param> 
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.json</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+		<display-name>ResourceServlet</display-name>
+		<servlet-name>ResourceServlet</servlet-name>
+		<servlet-class>com.sap.ui5.resource.ResourceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResourceServlet</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>
+	<!-- BEGIN: test-resources -->
+	<!-- test-resources mapping has to be switched off for productive use on 
+		a Java server! -->
+	<servlet-mapping>
+		<servlet-name>ResourceServlet</servlet-name>
+		<url-pattern>/test-resources/*</url-pattern>
+	</servlet-mapping>
+	<!-- END: test-resources -->
+	<!-- BEGIN: DEV MODE -->
+	<!-- DEV MODE switched off by default and can be switched on during development -->
+	<!-- but has to be switched off for productive use on a Java server! -->
+	<context-param>
+		<param-name>com.sap.ui5.resource.DEV_MODE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<!-- END: DEV MODE -->
+
+
+	<!-- ============================================================== -->
+	<!-- Cache Control Filter to prevent caching of any resource -->
+	<!-- ============================================================== -->
+
+	<filter>
+		<display-name>CacheControlFilter</display-name>
+		<filter-name>CacheControlFilter</filter-name>
+		<filter-class>com.sap.ui5.resource.CacheControlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CacheControlFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheControlFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheControlFilter</filter-name>
+		<url-pattern>*.xml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheControlFilter</filter-name>
+		<url-pattern>*.json</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheControlFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+
+
+	<!-- ============================================================== -->
+	<!-- UI5 proxy servlet -->
+	<!-- ============================================================== -->
+
+	<servlet>
+		<servlet-name>SimpleProxyServlet</servlet-name>
+		<servlet-class>com.sap.ui5.proxy.SimpleProxyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SimpleProxyServlet</servlet-name>
+		<url-pattern>/proxy/*</url-pattern>
+	</servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
+</web-app>

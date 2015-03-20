@@ -1,0 +1,168 @@
+#oTableRob, #oTableRob .sapUiTableCell,#oTableRob .sapUiTfBrd, #oTableRob .sapUiTableCell input, #oTableRob .sapUiTableCell span { font-size:9px;}
+#oTableRob .sapUiTableCol{
+	padding: 0;
+}
+#oTableRob .sapUiTableTr>td {
+padding-top: 0px;
+padding-bottom: 0px;
+}
+.hidden{
+display: none !important;
+}
+.myGraphBtn{
+          position:relative;!important;
+    float:right;!important;
+   }
+/* #tileVoyEst-hdr , #tileVoyage-hdr, #tileDemand-hdr, #tileRep-hdr
+{
+	border-bottom-color: #FFFFFF; 
+	color: #FFFFFF; 
+	background-color: #FFFFFF; 
+	min-height: 27px;
+	border: none;
+ 	border-bottom: 2px solid #FFFFFF; 
+} */
+#tileVoyEst , #tileVoyage, #tileDemand , #tileRep {
+	border: 1px solid #666666;
+	box-shadow: 5px 5px 7px #808888 !important;
+}
+#tileVoyEst:hover , #tileVoyage:hover, #tileDemand:hover, #tileRep:hover{
+	box-shadow: 5px 7px 10px #000000!important;
+	background: #x000FFF;
+}
+.ui-draggable-dragging {
+    z-index:99999;
+}
+#bunkSim{
+	height:600px;
+	overflow: scroll;
+}
+/* #vesselmode_1{
+top: 23px;
+width: 25px;
+left: -7px;
+padding: 0 !important;
+}
+.row{
+	margin-top:10px;
+}
+.sapUiTableColHdrCnt {
+min-height: 24px !important;
+background-color:blue;
+font-family:sans-serif;
+font-size:10pt;
+color:white;
+}
+.sapUiTableTr>td {
+padding-top: 0px;
+padding-bottom: 0px;
+}
+#idTable11 .sapUiTableCell span { font-size:10px; }
+#idTable11 .sapUiTableColCell label { font-size:10px; }
+.sapUiTableColHdrCnt{
+	height:20px;
+}
+.sapUiTableCol{
+	padding: 0;
+}
+.sapUiBody{
+	background-color: #FFFFFF; 
+	background-image: url("../images/blue.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size : cover;
+}
+.sapUiTableColHdrCnt,.sapUiTableCol,.sapUiTableColHdr{
+	height:15px !important;
+}
+.sapUiTableColHdrScr .sapUiTableCol{
+	height:10px ;
+}
+
+
+.axis {
+   font: 10px sans-serif;
+ }
+
+ .axis path,
+ .axis line {
+   fill: none;
+   stroke: #000;
+   shape-rendering: crispEdges;
+ }
+ .bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: orangered ;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+Creates a small triangle extender for the tooltip
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+Style northward tooltips differently
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+.myGraphBtn{
+          position:relative;!important;
+    float:right;!important;
+   }
+   
+   		.sapUiPanel .sapUiLnk { 
+			display: block;
+			margin-bottom: 3px;
+		}
+		
+		.VisualizeContent .sapUiUx3ShellContent {
+			background-color: red;
+		}
+		
+		
+	td.qvlabel {
+		padding: 0px 6px 0px 0px;
+	}
+	td.qvlabel>span {
+		max-width: 100px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	td.qvvalue>span, td.qvvalue>a {
+		max-width: 140px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding: 0px;
+	}
+		
+.sapUiForm {  
+  
+  background-color: white;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  position:relative;!important;
+    float:centre;!important;
+}   */

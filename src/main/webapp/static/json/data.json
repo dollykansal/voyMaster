@@ -1,0 +1,134 @@
+{
+    "type": "gantt",
+    "renderAt": "chartContainer",
+    "width": "400",
+    "height": "300",
+    "dataFormat": "json",
+    "manageResize":"0",
+    "dataSource": {
+    "chart": {
+        "canvasbgcolor": "F1F1FF, FFFFFF",
+        "canvasbgangle": "90",
+        "dateformat": "dd/mm/yyyy",
+        "ganttlinecolor": "0372AB",
+        "ganttlinealpha": "8",
+        "gridbordercolor": "0372AB",
+        "canvasbordercolor": "0372AB",
+        "showshadow": "0",
+        "taskbarfillmix": "{light-60}",
+        "showborder": "0"
+    },
+    "categories": [
+        {
+            "bgcolor": "0372AB",
+            "category": [
+                {
+                    "start": "1/1/2015",
+                    "end": "4/2/2015",
+                    "name": "Cargo",
+                    "fontcolor": "FFFFFF"
+                }
+            ]
+        },
+        {
+            "bgalpha": "0",
+            "category": [
+                {
+                    "start": "1/1/2015",
+                    "end": "7/1/2015",
+                    "name": "Week1"
+                },
+                {
+                    "start": "8/1/2015",
+                    "end": "14/1/2015",
+                    "name": "Week2"
+                },
+                {
+                    "start": "15/1/2015",
+                    "end": "21/1/2015",
+                    "name": "Week3"
+                },
+                {
+                    "start": "22/1/2015",
+                    "end": "28/1/2015",
+                    "name": "Week4"
+                },
+                {
+                    "start": "29/1/2015",
+                    "end": "4/2/2015",
+                    "name": "Week5"
+                }
+            ]
+        }
+    ],
+    "processes": {
+        "isbold": "1",
+        "headerbgcolor": "0372AB",
+        "fontcolor": "0372AB",
+        "bgcolor": "FFFFFF",
+        "process": [
+            {
+                "name": "Cargo A",
+                "id": "A"
+            },
+            {
+                "name": "Cargo B",
+                "id": "B"
+            },
+            {
+                "name": "Cargo C",
+                "id": "C"
+            }
+        ]
+    },
+    "tasks": {
+        "task": [
+            {
+                "name": "Loading",
+                "processid": "A",
+                "start": "1/1/2015",
+                "end": "13/1/2015",
+                "taskid": "B",
+                "bordercolor": "FF654F",
+                "color": "FF654F"
+            },
+            {
+                "name": "Unloading",
+                "processid": "B",
+                "start": "13/1/2015",
+                "end": "18/1/2015",
+                "taskid": "B",
+                "bordercolor": "8BBA00",
+                "color": "8BBA00"
+            },
+            
+            {
+                "name": "In Transit",
+                "processid": "C",
+                "start": "27/1/2015",
+                "end": "29/1/2015",
+                "taskid": "B",
+                "bordercolor": "F6BD0F",
+                "color": "F6BD0F"
+            }
+        
+        ]
+    },
+   
+    "legend": {
+        "item": [
+            {
+                "label": "Loading",
+                "color": "FF654F"
+            },
+            {
+                "label": "In Transit",
+                "color": "F6BD0F"
+            },
+            {
+                "label": "Unloading",
+                "color": "8BBA00"
+            }
+        ]
+    }
+}}
