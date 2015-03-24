@@ -12,30 +12,31 @@
 	data-sap-ui-theme="sap_goldreflection" data-sap-ui-debug=true>
 </script>
 <!------------------------------- include javascript files with UI elements ---------------------------------->
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
 <script src="static/javascripts/voyageDataService.js"></script> 
 <script src="static/javascripts/vesselavail.js"></script> 
 <script src="static/javascripts/createTable.js"></script>
 <script src="static/javascripts/frtsim.js"></script>
-<script src="static/javascripts/ganttchart.js"></script>
+<!-- <script src="static/javascripts/ganttchart.js"></script>
 <script src="static/javascripts/stackedChartH.js"></script>
-<script src="static/javascripts/chart.js"></script>
+<script src="static/javascripts/chart.js"></script> -->
 <script src="static/javascripts/vesselMaster.js"></script>
 <script src="static/javascripts/header.js"></script>
 <script src="static/javascripts/final_cargo.js"></script>
 <script src="static/javascripts/portrot.js"></script>
 <script src="static/javascripts/final_vessel.js"></script>
+<script src="static/javascripts/laytimeCal.js"></script>
 <script src="static/javascripts/demandLeft.js"></script>
 <script src="static/javascripts/bunk_sim.js"></script>
 <script src="static/javascripts/bunkCal.js"></script>
 <script src="static/javascripts/estDashboard.js"></script>
 <script src="static/javascripts/summary.js"></script>
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="static/vendor/fusioncharts-suite-xt/js/fusioncharts.js"></script>
 <script type="text/javascript"
 	src="static/vendor/fusioncharts-suite-xt/js/fusioncharts.widgets.js"></script>
 <script type="text/javascript"
-	src="static/vendor/fusioncharts-suite-xt/js/themes/fusioncharts.theme.fint.js"></script>
+	src="static/vendor/fusioncharts-suite-xt/js/themes/fusioncharts.theme.fint.js"></script> -->
 		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
 
 		<script>
@@ -49,6 +50,7 @@
 				var view1 = sap.ui.view({id:"estViewId1", viewName:"static/voyageest.Estimate1", type:sap.ui.core.mvc.ViewType.JS});
 				var view = sap.ui.view({id:"estViewId", viewName:"static/voyageest.Estimate", type:sap.ui.core.mvc.ViewType.JS});
 				var viewHome = sap.ui.view({id:"homeViewId", viewName:"static/voyageest.Home", type:sap.ui.core.mvc.ViewType.JS});
+				var viewLaytime = sap.ui.view({id:"laytimeViewId", viewName:"static.voyageest.Laytime", type:sap.ui.core.mvc.ViewType.JS});
 				
 				var oShell = new sap.ui.ux3.Shell("myShell", {
 					appTitle:"Voyage Estimator",
@@ -71,6 +73,10 @@
 					             				new sap.ui.ux3.NavigationItem({key:"wi_voy_overview",text:"Overview"}),
 					             				new sap.ui.ux3.NavigationItem({key:"wi_voy_create",text:"New Voyage"})
 					              				]
+					              }),
+					              new sap.ui.ux3.NavigationItem("wi_laytime_id",{
+					            	  key: "Laytime_Calculator",
+					            	  text: "Laytime Cal"
 					              })
 					              ],
 /*  					  worksetItemSelected: function (e){
@@ -128,6 +134,8 @@
 							mContent[id] = sap.ui.getCore().byId("estViewId");
 						}else if (id == "wi_voy_overview") {
 							mContent[id] = new estDash();
+						}else if (id == "wi_laytime_id") {
+							mContent[id] = sap.ui.getCore().byId("laytimeViewId");
 						}
 					}else{
 					}
