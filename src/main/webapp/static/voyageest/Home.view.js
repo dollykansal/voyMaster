@@ -49,7 +49,7 @@ sap.ui.jsview("static/voyageest.Home", {
 			sap.ui.getCore().byId("myShell").setContent(getContent("wi_voy_overview"));
 		})
 		
-		var oPanelDemand = new sap.ui.commons.Panel("tileDemand",{
+		var oPanelLaytime = new sap.ui.commons.Panel("tileLaytime",{
 			showCollapseIcon: false,
 			width: "95%",
 			height: "180px",
@@ -58,7 +58,7 @@ sap.ui.jsview("static/voyageest.Home", {
 				indent: "L4 M3 S2"
 			})
 		});
-		oPanelDemand.setTitle(new sap.ui.core.Title({text:"Demands"}).setEmphasized(false));
+/*		oPanelDemand.setTitle(new sap.ui.core.Title({text:"Demands"}).setEmphasized(false));
 		oPanelDemand.setAreaDesign(sap.ui.commons.enums.AreaDesign.Plain);
 		oPanelDemand.setBorderDesign(sap.ui.commons.enums.BorderDesign.Box);
 		oPanelDemand.addContent(new sap.ui.commons.Image({src: 'static/images/demand.png'}));
@@ -71,7 +71,26 @@ sap.ui.jsview("static/voyageest.Home", {
 				span: "L2 M2 S2",
 				//indent: "L3 M2 S1"
 			})
+		});*/
+		oPanelLaytime.setTitle(new sap.ui.core.Title({text:"Laytime Calculator"}).setEmphasized(false));
+		oPanelLaytime.setAreaDesign(sap.ui.commons.enums.AreaDesign.Plain);
+		oPanelLaytime.setBorderDesign(sap.ui.commons.enums.BorderDesign.Box);
+		oPanelLaytime.addContent(new sap.ui.commons.Image({src: 'static/images/laytime.png'}));
+		oPanelLaytime.attachBrowserEvent("click", function(){
+			sap.ui.getCore().byId("myShell").setSelectedWorksetItem("wi_laytime_id");
+			sap.ui.getCore().byId("myShell").setContent(getContent("wi_laytime_id"));
+		})
+		
+		var oPanelRep = new sap.ui.commons.Panel("tileRep",{
+			showCollapseIcon: false,
+			width: "95%",
+			height: "180px",
+			layoutData: new sap.ui.layout.GridData({
+				span: "L2 M2 S2",
+				//indent: "L3 M2 S1"
+			})
 		});
+		
 		oPanelRep.setTitle(new sap.ui.core.Title({text:"Reporting"}).setEmphasized(false));
 		oPanelRep.setAreaDesign(sap.ui.commons.enums.AreaDesign.Plain);
 		oPanelRep.setBorderDesign(sap.ui.commons.enums.BorderDesign.Box);
@@ -83,7 +102,7 @@ sap.ui.jsview("static/voyageest.Home", {
 		var oGridTiles = new sap.ui.layout.Grid("gridTile",{
 				hSpacing: 2,
 				vSpacing: 2, 	
-				content: [ oPanelVoyEst,oPanelVoyage,oPanelDemand,oPanelRep
+				content: [ oPanelVoyEst,oPanelVoyage,oPanelLaytime,oPanelRep
 				]
 			});
 		return oGridTiles;
