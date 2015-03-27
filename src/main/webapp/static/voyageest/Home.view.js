@@ -19,7 +19,7 @@ sap.ui.jsview("static/voyageest.Home", {
 			showCollapseIcon: false,
 			layoutData: new sap.ui.layout.GridData({
 				span: "L2 M2 S2",
-				indent: "L4 M3 S2"
+				indent: "L3 M2 S1"
 			})
 		});
 		oPanelVoyEst.setTitle(new sap.ui.core.Title({text:"Voyage Estimator"}).setEmphasized(false));
@@ -47,6 +47,23 @@ sap.ui.jsview("static/voyageest.Home", {
 		oPanelVoyage.attachBrowserEvent("click", function(){
 			sap.ui.getCore().byId("myShell").setSelectedWorksetItem("wi_voy_id");
 			sap.ui.getCore().byId("myShell").setContent(getContent("wi_voy_overview"));
+		})
+		var oPanelVessel = new sap.ui.commons.Panel("tileVessel",{
+			showCollapseIcon: false,
+			width: "95%",
+			height: "180px",
+			layoutData: new sap.ui.layout.GridData({
+				span: "L2 M2 S2",
+				//indent: "L3 M2 S1"
+			})
+		});
+		oPanelVessel.setTitle(new sap.ui.core.Title({text:"Vessel Master"}).setEmphasized(false));
+		oPanelVessel.setAreaDesign(sap.ui.commons.enums.AreaDesign.Plain);
+		oPanelVessel.setBorderDesign(sap.ui.commons.enums.BorderDesign.Box);
+		oPanelVessel.addContent(new sap.ui.commons.Image({src: 'static/images/image_green.gif'}));
+		oPanelVessel.attachBrowserEvent("click", function(){
+			sap.ui.getCore().byId("myShell").setSelectedWorksetItem("wi_vessel_id");
+			sap.ui.getCore().byId("myShell").setContent(getContent("wi_vessel_id"));
 		})
 		
 		var oPanelLaytime = new sap.ui.commons.Panel("tileLaytime",{
@@ -102,7 +119,7 @@ sap.ui.jsview("static/voyageest.Home", {
 		var oGridTiles = new sap.ui.layout.Grid("gridTile",{
 				hSpacing: 2,
 				vSpacing: 2, 	
-				content: [ oPanelVoyEst,oPanelVoyage,oPanelLaytime,oPanelRep
+				content: [ oPanelVoyEst,oPanelVoyage,oPanelVessel,oPanelLaytime,oPanelRep
 				]
 			});
 		return oGridTiles;

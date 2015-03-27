@@ -1,18 +1,19 @@
 package com.ep360.data.models;
-// Generated Mar 16, 2015 10:37:31 PM by Hibernate Tools 4.3.1
+// Generated Mar 26, 2015 10:10:06 PM by Hibernate Tools 4.3.1
 
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -80,6 +81,7 @@ public class VoyHeader  implements java.io.Serializable {
      private String createdBy;
      private Date lastCreatedOn;
      private String lastCreatedBy;
+     private Set<VoyageVessel> voyageVessels = new HashSet<VoyageVessel>(0);
      private Set<PortRotation> portRotations = new HashSet<PortRotation>(0);
      private Set<Cargo> cargos = new HashSet<Cargo>(0);
 
@@ -124,7 +126,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.totProfit = totProfit;
         this.createdOn = createdOn;
     }
-    public VoyHeader(String tenantId, String clientId, String voyType, Integer voyEstNo, Integer vesselNo, String tcOper, String trader, String voyOper, String tradeId, String voyStatus, Boolean zeroProfInd, double doCons, double doExp, double doPrice, double foCons, double foExp, double foPrice, double lsdoCons, double lsdoExp, double lsdoPrice, Double lsfoCons, double lsfoExp, double lsfoPrice, double totDemdes, double totAdcomm, double totBrok, double totFrttax, double totLinterm, double totPortChrg, double totBunkChrg, double cbase, double cev, double ilohc, double ballBonus, double routServ, int addcostitemNo, double addcost, double dailyHireCost, double dailyHireAddcomm, double totRev, double operExp, double operProfit, double netHire, double totHire, double totExpense, double totProfit, Date createdOn, String createdBy, Date lastCreatedOn, String lastCreatedBy, Set portRotations, Set cargos) {
+    public VoyHeader(String tenantId, String clientId, String voyType, Integer voyEstNo, Integer vesselNo, String tcOper, String trader, String voyOper, String tradeId, String voyStatus, Boolean zeroProfInd, double doCons, double doExp, double doPrice, double foCons, double foExp, double foPrice, double lsdoCons, double lsdoExp, double lsdoPrice, Double lsfoCons, double lsfoExp, double lsfoPrice, double totDemdes, double totAdcomm, double totBrok, double totFrttax, double totLinterm, double totPortChrg, double totBunkChrg, double cbase, double cev, double ilohc, double ballBonus, double routServ, int addcostitemNo, double addcost, double dailyHireCost, double dailyHireAddcomm, double totRev, double operExp, double operProfit, double netHire, double totHire, double totExpense, double totProfit, Date createdOn, String createdBy, Date lastCreatedOn, String lastCreatedBy, Set voyageVessels, Set portRotations, Set cargos) {
        this.tenantId = tenantId;
        this.clientId = clientId;
        this.voyType = voyType;
@@ -175,6 +177,7 @@ public class VoyHeader  implements java.io.Serializable {
        this.createdBy = createdBy;
        this.lastCreatedOn = lastCreatedOn;
        this.lastCreatedBy = lastCreatedBy;
+       this.voyageVessels = voyageVessels;
        this.portRotations = portRotations;
        this.cargos = cargos;
     }
@@ -652,7 +655,7 @@ public class VoyHeader  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created_on",length=19,insertable =false, updatable=false)
+    @Column(name="created_on", insertable=false, length=19, updatable=false)
     public Date getCreatedOn() {
         return this.createdOn;
     }
@@ -691,7 +694,16 @@ public class VoyHeader  implements java.io.Serializable {
         this.lastCreatedBy = lastCreatedBy;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader",cascade=CascadeType.ALL)
+@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
+    public Set<VoyageVessel> getVoyageVessels() {
+        return this.voyageVessels;
+    }
+    
+    public void setVoyageVessels(Set voyageVessels) {
+        this.voyageVessels = voyageVessels;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<PortRotation> getPortRotations() {
         return this.portRotations;
     }
@@ -700,7 +712,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.portRotations = portRotations;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader",cascade=CascadeType.ALL)
+@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<Cargo> getCargos() {
         return this.cargos;
     }
