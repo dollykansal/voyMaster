@@ -36,6 +36,9 @@ sap.ui.controller("static/voyageest.Estimate", {
 //	}
 	selectVessel: function(rowNo) {
 		var vesselMasterData = sap.ui.getCore().getModel("vesselMaster").getData()['modelData'][rowNo];
+		var oModel = new sap.ui.model.json.JSONModel();
+		oModel.setData({modelData: vesselMasterData});
+		sap.ui.getCore().setModel(oModel,"selectedVessel")
 		var data1_new = [{mv:vesselMasterData.id.vesselName,vesselType:vesselMasterData.id.vesselType,dwt:vesselMasterData.dwt,draft:vesselMasterData.draft}];
 		var data2_new = [{ballast: vesselMasterData.ballast, laden: vesselMasterData.laden}];
 		var data3_new =[

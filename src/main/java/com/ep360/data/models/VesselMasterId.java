@@ -12,7 +12,11 @@ import javax.persistence.Embeddable;
 public class VesselMasterId  implements java.io.Serializable {
 
 
-     private String vesselName;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5395470727132881478L;
+	private String vesselName;
      private String vesselType;
 
     public VesselMasterId() {

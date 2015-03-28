@@ -19,7 +19,11 @@ import javax.persistence.Table;
 public class Demand  implements java.io.Serializable {
 
 
-     private Integer demandId;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4388155069285801175L;
+	private Integer demandId;
      private String account;
      private String cargoName;
      private String loadingPort;

@@ -55,5 +55,6 @@
 
 	</bean>
 	<bean id="gson" class="com.google.gson.Gson"></bean>
+	<bean id="gsonBuilder" class="com.google.gson.GsonBuilder"></bean>
 	<bean id="user" class="com.ep360.data.models.DBUser"></bean>
 </beans>

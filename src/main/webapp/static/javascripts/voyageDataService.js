@@ -4,6 +4,7 @@ var VoyageDataService = function(){
 		data['modelSum'] = sap.ui.getCore().getModel("modelSumm").getData();
 		data['cargo'] = sap.ui.getCore().getModel("cargo").getData()['modelData'];
 		data['port'] = sap.ui.getCore().getModel("port").getData()['modelData'];
+		data['vessel'] = sap.ui.getCore().getModel("selectedVessel").getData()['modelData'];
 		$.ajax({
 			url:"http://localhost:8080/voyage/saveCalData",
 			type:"POST",

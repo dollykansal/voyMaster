@@ -60,8 +60,9 @@
 		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
 
 		<script>
-				window.vesselMaster = JSON.parse('${vesselMaster}');
-				window.demands = JSON.parse('${demands}');
+				var oModel = new sap.ui.model.json.JSONModel();
+				oModel.setData({vessels: JSON.parse('${vesselMaster}'),demands:JSON.parse('${demands}'),estimates:JSON.parse('${estimates}')});
+				sap.ui.getCore().setModel(oModel, "dbData");
 				sap.ui.localResources("static/voyageest");
 /* 				var view = sap.ui.view({id:"idVoyage11", viewName:"voyageest.Voyage1", type:sap.ui.core.mvc.ViewType.JS});
 				view.placeAt("content"); */

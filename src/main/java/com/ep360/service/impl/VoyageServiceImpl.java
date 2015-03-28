@@ -1,7 +1,10 @@
 package com.ep360.service.impl;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +17,11 @@ import com.ep360.data.models.Cargo;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.PortRotation;
 import com.ep360.data.models.VesselMaster;
+import com.ep360.data.models.VesselMasterId;
 import com.ep360.data.models.VoyHeader;
+import com.ep360.data.models.VoyageVessel;
 import com.ep360.service.api.VoyageService;
+import com.google.gson.Gson;
 
 @Service(value="voyageService")
 @Scope(value="prototype")
@@ -23,6 +29,9 @@ public class VoyageServiceImpl implements VoyageService {
 
 	@Autowired
 	private DBDataService dataService;
+	
+	@Autowired
+	private Gson gson;
 	
 	@Override
 	public List<VoyHeader> getVoyageHeaderData() {
@@ -40,15 +49,60 @@ public class VoyageServiceImpl implements VoyageService {
 	}
 
 	@Override
-	public void saveData(Map<Object, Object> reqData) {
+	public void saveData(Map<Object, Object> reqData, String username) {
 		if(reqData.get("modelSum")!=null && reqData.get("cargo")!=null && reqData.get("port")!=null){
 			List<Object> entities = new ArrayList<Object>();
 			VoyHeader voyHeader = saveVoyageHeader((Map<Object,Object>)reqData.get("modelSum"));
+			voyHeader.setCreatedBy(username);
 			entities.add(voyHeader);
 			entities.addAll(saveCargo((List<Map<Object, Object>>)reqData.get("cargo"),voyHeader));
 			entities.addAll(savePortRotation((List<Map<Object, Object>>)reqData.get("port"),voyHeader));
+			entities.add(saveVessel((Map<Object,Object>)reqData.get("vessel"),voyHeader));
 			dataService.saveAllData(entities);
 		}
+	}
+
+	private Object saveVessel(Map<Object, Object> reqData, VoyHeader voyHeader) {
+		VoyageVessel voyageVessel = new VoyageVessel();
+		voyageVessel.setVoyHeader(voyHeader);
+		Map<Object,Object> id = (Map<Object, Object>) reqData.get("id");
+		voyageVessel.setVesselName((String) id.get("vesselName"));
+		voyageVessel.setLaycan(getValueFloat(reqData.get("laycan")));
+		voyageVessel.setVesselType((String) id.get("vesselType"));
+		voyageVessel.setDwt(getValueFloat(reqData.get("dwt")));
+		voyageVessel.setDraft(reqData.get("draft")!=null?(String)reqData.get("draft"):null);
+		voyageVessel.setBallast(getValueFloat(reqData.get("ballast")));
+		voyageVessel.setLaden(getValueFloat(reqData.get("laden")));
+		voyageVessel.setDoDieselType(reqData.get("doDieselType")!=null?(String)reqData.get("doDieselType"):null);
+		voyageVessel.setDoSea(getValueFloat(reqData.get("doSea")));
+		voyageVessel.setDoIdle(getValueFloat(reqData.get("doIdle")));
+		voyageVessel.setDoWork(getValueFloat(reqData.get("doWork")));
+		voyageVessel.setLsdoDieselType(reqData.get("lsdoDieselType")!=null?(String)reqData.get("lsdoDieselType"):null);
+		voyageVessel.setLsdoSea(getValueFloat(reqData.get("lsdoSea")));
+		voyageVessel.setLsdoIdle(getValueFloat(reqData.get("lsdoIdle")));
+		voyageVessel.setLsdoWork(getValueFloat(reqData.get("lsdoWork")));
+		voyageVessel.setFoType(getValueFloat(reqData.get("foType")));
+		voyageVessel.setFoBallast(getValueFloat(reqData.get("foBallast")));
+		voyageVessel.setFoLaden(getValueFloat(reqData.get("foLaden")));
+		voyageVessel.setFoIdle(getValueFloat(reqData.get("foIdle")));
+		voyageVessel.setFoWork(getValueFloat(reqData.get("foWork")));
+		voyageVessel.setLsfoType(getValueFloat(reqData.get("lsfoType")));
+		voyageVessel.setLsfoBallast(getValueFloat(reqData.get("lsfoBallast")));
+		voyageVessel.setLsfoIdle(getValueFloat(reqData.get("lsfoIdle")));
+		voyageVessel.setLsfoLaden(getValueFloat(reqData.get("lsfoLaden")));
+		voyageVessel.setLsfoWork(getValueFloat(reqData.get("lsfoWork")));
+		return voyageVessel;
+	}
+	
+	private Date getDate(String date){
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+		Date retDate = null;
+		try {
+			retDate = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return retDate;
 	}
 
 	private List<PortRotation> savePortRotation(List<Map<Object, Object>> map, VoyHeader voyHeader) {
@@ -68,8 +122,12 @@ public class VoyageServiceImpl implements VoyageService {
 				port.setDemerages(getBigDecimalValue(reqData.get("dem")));
 				port.setPortCharge(getBigDecimalValue(reqData.get("des")));
 				port.setVoyHeader(voyHeader);
-//				port.setArrivaleDate(arrivaleDate);
-//				port.setDepartureDate(departureDate);
+				if(reqData.get("arrival")!=null){
+					port.setArrivaleDate(getDate((String)reqData.get("arrival")));
+				}
+				if(reqData.get("departure")!=null){
+					port.setDepartureDate(getDate((String)reqData.get("departure")));
+				}
 				portList.add(port);
 			}
 		}
@@ -144,6 +202,18 @@ public class VoyageServiceImpl implements VoyageService {
 		if(data!=null){
 			try{
 				retValue = Double.parseDouble(String.valueOf(data));
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+		return retValue;
+	}
+	
+	private float getValueFloat(Object data){
+		float retValue = 0;
+		if(data!=null){
+			try{
+				retValue = Float.parseFloat(String.valueOf(data));
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}

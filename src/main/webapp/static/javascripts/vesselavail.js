@@ -8,7 +8,8 @@ var Vesselavail = function(oController){
 //	{vesselName: "Myra", laycan: "3", vesselType:"LTC",dwt:"2550",draft:"578.00",ballast:"80",laden:"70",doDieselType:"DMB",dosea:"5",doidle:"10",dowork:"25",lsdoDieselType:"DMA",lsdosea:"15",lsdoidle:"16",lsdowork:"21",fotype:"80",foballast:"30",foladen:"25",foidle:"2",fowork:"6",lsfotype:"180",lsfoballast:"20",lsfoladen:"25",lsfoidle:"2",lsfowork:"6"},
 //	{vesselName: "Gemini", laycan: "2", vesselType:"TCT",dwt:"5520",draft:"230.00",ballast:"90",laden:"60",doDieselType:"MGO",dosea:"5",doidle:"10",dowork:"35",lsdoDieselType:"DMB",lsdosea:"10",lsdoidle:"16",lsdowork:"21",fotype:"80",foballast:"25",foladen:"25",foidle:"1",fowork:"7",lsfotype:"180",lsfoballast:"20",lsfoladen:"25",lsfoidle:"1",lsfowork:"7"},
 //];
-var aData = window.vesselMaster;
+var dbData = sap.ui.getCore().getModel("dbData").getData();
+var aData = dbData['vessels'];
 //Create an instance of the table control
 var oTableVess = window.helper.createTable({title:"Vessel Availability"});
 

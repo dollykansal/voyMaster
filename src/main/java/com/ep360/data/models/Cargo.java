@@ -26,7 +26,11 @@ import javax.persistence.Table;
 public class Cargo  implements java.io.Serializable {
 
 
-     private Integer cargoId;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4449818035475295670L;
+	private Integer cargoId;
      private VoyHeader voyHeader;
      private String account;
      private String cargoName;

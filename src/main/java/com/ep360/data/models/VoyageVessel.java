@@ -22,7 +22,11 @@ import javax.persistence.Table;
 public class VoyageVessel  implements java.io.Serializable {
 
 
-     private Integer voyageVesselId;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2400020044150959007L;
+	private Integer voyageVesselId;
      private VoyHeader voyHeader;
      private String vesselName;
      private Float laycan;

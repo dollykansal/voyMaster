@@ -6,6 +6,7 @@ import com.ep360.data.models.DBUser;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.VesselMaster;
 import com.ep360.data.models.VoyHeader;
+import com.ep360.data.models.VoyageVessel;
 
 public interface DBDataService {
 
@@ -32,4 +33,6 @@ public interface DBDataService {
 	public void updateUser(String username);
 	
 	public List<DBUser> getUserCollection(String username);
+
+	public List<VoyageVessel> getEstimates();
 }

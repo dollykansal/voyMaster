@@ -21,7 +21,11 @@ import javax.persistence.UniqueConstraint;
 public class VesselMaster  implements java.io.Serializable {
 
 
-     private VesselMasterId id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -177329981889367504L;
+	private VesselMasterId id;
      private Float laycan;
      private Float dwt;
      private String draft;

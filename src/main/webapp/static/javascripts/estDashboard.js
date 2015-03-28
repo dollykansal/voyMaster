@@ -52,7 +52,8 @@ var estDash = function(){
 
 	//Create a model and bind the table rows to this model
 	var oModel = new sap.ui.model.json.JSONModel();
-	oModel.setData({modelData: aDataEstDash});
+	var dbData = sap.ui.getCore().getModel("dbData").getData();
+	oModel.setData({modelData: dbData['estimates']});
 	oTableDash.setModel(oModel);
 	oTableDash.bindRows("/modelData");
 	    

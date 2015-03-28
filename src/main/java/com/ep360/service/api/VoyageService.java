@@ -6,6 +6,7 @@ import java.util.Map;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.VesselMaster;
 import com.ep360.data.models.VoyHeader;
+import com.ep360.data.models.VoyageVessel;
 
 public interface VoyageService {
 
@@ -13,7 +14,7 @@ public interface VoyageService {
 
 	public List<VoyHeader> getVoyageHeaderData();
 
-	public void saveData(Map<Object, Object> reqData);
+	public void saveData(Map<Object, Object> reqData, String username);
 	
 	public List<Demand> getDemands();
 }

@@ -28,7 +28,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class DBUser  implements java.io.Serializable, UserDetails {
 
 
-     private UsersId id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1385032647638016372L;
+	private UsersId id;
      private String fullName;
      private Date lastLoginTime;
      private Date lastLogoutTime;

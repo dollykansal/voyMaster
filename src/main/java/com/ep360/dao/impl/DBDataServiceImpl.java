@@ -18,6 +18,7 @@ import com.ep360.data.models.Demand;
 import com.ep360.data.models.UsersId;
 import com.ep360.data.models.VesselMaster;
 import com.ep360.data.models.VoyHeader;
+import com.ep360.data.models.VoyageVessel;
 
 @Repository("dataService")
 public class DBDataServiceImpl implements DBDataService{
@@ -40,6 +41,16 @@ public class DBDataServiceImpl implements DBDataService{
 				.find("from VesselMaster");
 		if (users != null && users.size() > 0) {
 			return users;
+		}
+		return null;
+	}
+
+	@Override
+	public List<VoyageVessel> getEstimates() {
+		List<VoyageVessel> estimates = hibernateTemplate
+				.find("from VoyageVessel");
+		if (estimates != null && estimates.size() > 0) {
+			return estimates;
 		}
 		return null;
 	}

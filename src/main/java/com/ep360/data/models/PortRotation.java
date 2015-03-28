@@ -29,7 +29,11 @@ import javax.persistence.TemporalType;
 public class PortRotation  implements java.io.Serializable {
 
 
-     private Integer portRotationId;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4315230966137723618L;
+	private Integer portRotationId;
      private VoyHeader voyHeader;
      private String type;
      private String portName;
