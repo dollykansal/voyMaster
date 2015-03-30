@@ -1,12 +1,5 @@
 var estDash = function(){
 /////////////////////////////////////////second table - cargo  ///////////////////////////////////////////////////////////////////
-	var aDataEstDash = [
-	                  {sNo: "1", vessel: "Gemini", tcOper: "BRAEMAR", trader:"GULF MARITIME", voyOper: "",
-	                	  zeroProfInd: true,totDemDis:"137.00",totPortCh:"200.00",totalFrtTax:"256.00",totBunkExp:"450.00",operExp:"1043.00",totRev:"1780.00",totProfit:"737.00"},
-	                  {sNo: "2", vessel: "Vespucci", tcOper: "FITCO", trader:"INTEROCEAN", voyOper: "",zeroProfInd:false,
-	                	totDemDis:"456.00",totPortCh:"345.00",totalFrtTax:"123.00",totBunkExp:"980.00",operExp:"1904.00",totRev:"5690.00",totProfit:"3786.00"}
-	                  ];
-	
 	//Create a panel instance
 	var oPanelDash = new sap.ui.commons.Panel({
 		width : "100%"
@@ -22,7 +15,25 @@ var estDash = function(){
 				
 			new sap.ui.commons.Button({text: "Copy and create new",lite : true
 			}),
-			new sap.ui.commons.Button({text: "Open estimate",lite : true
+			new sap.ui.commons.Button({text: "Open estimate",lite : true,press:function(){
+				    var rowIndex = oTableDash.getSelectedIndex();
+				    var voyNo = oModel.getData()['modelData'][rowIndex].voyNo;
+				    console.log(voyNo);
+				    var url="http://localhost:8080/voyage/vesselMaster/"+voyNo;
+					$.ajax({
+						url:url,
+						type:"GET",
+						contentType: 'application/json',
+						success:function(data){
+							console.log(data);
+							sap.ui.getCore().getModel("vessel").setData(data["vesselData"]);
+							sap.ui.getCore().getModel("cargo").setData({modelData: data["cargoData"]});
+							sap.ui.getCore().getModel("port").setData({modelData: data["portData"]});
+							sap.ui.getCore().getModel("modelSumm").setData(data["voyHeaderData"]);
+							sap.ui.getCore().byId("myShell").setContent(sap.ui.getCore().byId("estViewId"),true);
+						}
+					});
+				}
 			}),		
 		new sap.ui.commons.Button({text: "Edit estimate",lite : true
 		}),
@@ -34,8 +45,8 @@ var estDash = function(){
 	});
 	oTableDash.setEditable(false);
 	//Define the columns and the control templates to be used
-	oTableDash.addColumn(window.helper.createColumn("select", "Select to compare", "20px", "CH"));
-	oTableDash.addColumn(window.helper.createColumn("sNo", "SNo", "20px", "TV"));
+//	oTableDash.addColumn(window.helper.createColumn("select", "Select to compare", "20px", "CH"));
+//	oTableDash.addColumn(window.helper.createColumn("sNo", "SNo", "20px", "TV"));
 	//oTableDash.addColumn(window.helper.createColumn("estNo", "Estimate Number", "40px", "TF"));
 	oTableDash.addColumn(window.helper.createColumn("vessel", "Vessel", "40px", "TF"));
 	oTableDash.addColumn(window.helper.createColumn("tcOper", "TCOperator", "40px", "TF"));
@@ -56,10 +67,8 @@ var estDash = function(){
 	oModel.setData({modelData: dbData['estimates']});
 	oTableDash.setModel(oModel);
 	oTableDash.bindRows("/modelData");
-	    
-
 	//Initially sort the table
-	oTableDash.sort(oTableDash.getColumns()[0]);
+//	oTableDash.sort(oTableDash.getColumns()[0]);
 	oPanelDash.addContent(oTableDash);
 	return oPanelDash;
 }

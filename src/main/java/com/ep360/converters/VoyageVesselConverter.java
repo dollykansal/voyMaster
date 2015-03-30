@@ -26,5 +26,7 @@ public class VoyageVesselConverter extends AbstractConverter<VoyHeader, VoyageVe
 		target.setTotBunkExp(source.getTotBunkChrg());
 		target.setOperExp(source.getOperExp());
 		target.setTotRev(source.getTotRev());
+		target.setVoyNo(source.getVoyNo());
+		target.setVoyageVesselId(voyageVessel.getVoyageVesselId());
 	}
 }

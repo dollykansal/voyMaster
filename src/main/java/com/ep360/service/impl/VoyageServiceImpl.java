@@ -39,6 +39,11 @@ public class VoyageServiceImpl implements VoyageService {
 	}
 	
 	@Override
+	public VoyHeader getVoyageHeaderData(int voyNo) {
+		return dataService.getVoyageHeaderData(voyNo);
+	}
+
+	@Override
 	public List<VesselMaster> getVesselMasterData() {
 		return dataService.getVesselMasterData();
 	}

@@ -35,4 +35,6 @@ public interface DBDataService {
 	public List<DBUser> getUserCollection(String username);
 
 	public List<VoyageVessel> getEstimates();
+
+	public VoyHeader getVoyageHeaderData(int voyNo);
 }

@@ -7,12 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ep360.controller.data.EstimateData;
 import com.ep360.controller.data.VoyageVesselData;
+import com.ep360.converters.EstimateConverter;
 import com.ep360.converters.VoyageVesselConverter;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.VesselMaster;
 import com.ep360.data.models.VoyHeader;
-import com.ep360.data.models.VoyageVessel;
 import com.ep360.facade.voyage.VoyageFacade;
 import com.ep360.service.api.VoyageService;
 
@@ -24,7 +25,10 @@ public class VoyageFacadeImpl implements VoyageFacade{
 
 	@Autowired
 	private VoyageVesselConverter voyageVesselConverter;
-
+	
+	@Autowired
+	private EstimateConverter estimateConverter;
+	
 	public List<VoyageVesselData> getVoyageVesselList(){
 		List<VoyHeader> voyageVesselList = voyageService.getVoyageHeaderData();	
 		List<VoyageVesselData> dataList = new ArrayList<VoyageVesselData>();
@@ -56,5 +60,11 @@ public class VoyageFacadeImpl implements VoyageFacade{
 	@Override
 	public List<Demand> getDemands() {
 		return voyageService.getDemands();
+	}
+
+	@Override
+	public EstimateData getVoyageMasterData(int voyNo) {
+		VoyHeader voyHeader = voyageService.getVoyageHeaderData(voyNo);
+		return estimateConverter.convert(voyHeader);
 	}
 }

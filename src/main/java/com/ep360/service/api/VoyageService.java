@@ -13,6 +13,8 @@ public interface VoyageService {
 	public List<VesselMaster> getVesselMasterData();
 
 	public List<VoyHeader> getVoyageHeaderData();
+	
+	public VoyHeader getVoyageHeaderData(int voyNo);
 
 	public void saveData(Map<Object, Object> reqData, String username);
 	

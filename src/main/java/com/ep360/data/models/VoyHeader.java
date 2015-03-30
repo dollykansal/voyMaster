@@ -707,7 +707,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.voyageVessels = voyageVessels;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
+@OneToMany(fetch=FetchType.EAGER, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<PortRotation> getPortRotations() {
         return this.portRotations;
     }
@@ -716,7 +716,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.portRotations = portRotations;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
+@OneToMany(fetch=FetchType.EAGER, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<Cargo> getCargos() {
         return this.cargos;
     }

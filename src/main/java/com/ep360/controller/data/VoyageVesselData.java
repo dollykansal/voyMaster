@@ -25,6 +25,18 @@ public class VoyageVesselData {
 	private double totRev;
 	
 	private double totProfit;
+	
+	private int voyageVesselId;
+	
+	private int voyNo;
+
+	public int getVoyageVesselId() {
+		return voyageVesselId;
+	}
+
+	public void setVoyageVesselId(int voyageVesselId) {
+		this.voyageVesselId = voyageVesselId;
+	}
 
 	public String getVessel() {
 		return vessel;
@@ -120,5 +132,13 @@ public class VoyageVesselData {
 
 	public void setTotProfit(double totProfit) {
 		this.totProfit = totProfit;
+	}
+
+	public int getVoyNo() {
+		return voyNo;
+	}
+
+	public void setVoyNo(int voyNo) {
+		this.voyNo = voyNo;
 	}
 }

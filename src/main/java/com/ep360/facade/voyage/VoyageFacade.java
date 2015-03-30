@@ -3,6 +3,7 @@ package com.ep360.facade.voyage;
 import java.util.List;
 import java.util.Map;
 
+import com.ep360.controller.data.EstimateData;
 import com.ep360.controller.data.VoyageVesselData;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.VesselMaster;
@@ -15,6 +16,8 @@ public interface VoyageFacade {
 	public List<VoyHeader> getVoyageHeaderData();
 	
 	public List<VesselMaster> getVoyageMasterData();
+	
+	public EstimateData getVoyageMasterData(int voyNo);
 	
 	public Map<String,Object> saveData(Map<Object,Object> reqData, String username);
 	
