@@ -246,7 +246,7 @@ var vesselDashboard = function(){
 	});
 	oTabStrip1.createTab("General Data",oSimpleForm);
 	oTabStrip1.createTab("Gear & HA/HO",oLayoutM);
-
+	oTabStrip1.createTab("Cargo Revenue",oTableGear);
 	
 	
 /*	//Create a model and bind the table rows to this model
