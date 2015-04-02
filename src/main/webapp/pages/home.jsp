@@ -51,6 +51,7 @@
 <script src="static/javascripts/estDashboard.js"></script>
 <script src="static/javascripts/vesselDashboard.js"></script>
 <script src="static/javascripts/summary.js"></script>
+<script src="static/javascripts/contract.js"></script>
 <!-- <script type="text/javascript"
 	src="static/vendor/fusioncharts-suite-xt/js/fusioncharts.js"></script>
 <script type="text/javascript"
@@ -73,6 +74,7 @@
 				var viewHome = sap.ui.view({id:"homeViewId", viewName:"static/voyageest.Home", type:sap.ui.core.mvc.ViewType.JS});
 				var viewLaytime = sap.ui.view({id:"laytimeViewId", viewName:"static.voyageest.Laytime", type:sap.ui.core.mvc.ViewType.JS});
 				var viewVessel = sap.ui.view({id:"vesselViewId", viewName:"static.voyageest.Vessel_Master", type:sap.ui.core.mvc.ViewType.JS});
+				var viewContract = sap.ui.view({id:"contractViewId", viewName:"static.voyageest.Contract", type:sap.ui.core.mvc.ViewType.JS});
 				
 				var oShell = new sap.ui.ux3.Shell("myShell", {
 					appTitle:"Voyage Estimator",
@@ -103,6 +105,11 @@
 					              new sap.ui.ux3.NavigationItem("wi_vessel_id",{
 					            	  key: "Vessel_master",
 					            	  text: "Vessel Master"
+					              }),
+					              ,
+					              new sap.ui.ux3.NavigationItem("wi_contract_id",{
+					            	  key: "Contract_master",
+					            	  text: "Contract"
 					              })
 					              ],
 /*  					  worksetItemSelected: function (e){
@@ -176,6 +183,8 @@
 							mContent[id] = sap.ui.getCore().byId("laytimeViewId");
 						}else if (id == "wi_vessel_id") {
 							mContent[id] = sap.ui.getCore().byId("vesselViewId");
+						}else if (id == "wi_contract_id") {
+							mContent[id] = sap.ui.getCore().byId("contractViewId");
 						}
 					}else{
 					}

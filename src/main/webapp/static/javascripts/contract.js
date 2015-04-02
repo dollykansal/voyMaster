@@ -1,8 +1,6 @@
-sap.ui.jsfragment("vesselDetails.fragments.JSFragmentDialog", {
-    createContent: function(oController) {
-    	var oDialog = new sap.ui.commons.Dialog({title: "Vessel Details"});
+var contract = function(){
 
-	var oSimpleForm = new sap.ui.layout.form.SimpleForm(
+/*	var oSimpleForm = new sap.ui.layout.form.SimpleForm(
 			"sfGenDetails",
 			{
 				maxContainerCols: 3,
@@ -185,9 +183,5 @@ sap.ui.jsfragment("vesselDetails.fragments.JSFragmentDialog", {
         press: function(){oDialog .close();}
     });
     oDialog.addButton(oButton);
-    
-    var panelSpeed =  new Vessel();
-    oDialog.addContent(panelSpeed);
-	return oDialog;
-    }
-});
+	return oDialog;*/
+    };

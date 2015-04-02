@@ -13,7 +13,7 @@ display: none !important;
           position:relative;!important;
     float:right;!important;
    }
-/* #tileVoyEst-hdr , #tileVoyage-hdr, #tileLaytime-hdr, #tileRep-hdr, #tileVessel-hdr
+/* #tileVoyEst-hdr , #tileVoyage-hdr, #tileLaytime-hdr, #tileRep-hdr, #tileVessel-hdr,#tileContract-hdr
 {
 	border-bottom-color: #FFFFFF; 
 	color: #FFFFFF; 
@@ -22,11 +22,11 @@ display: none !important;
 	border: none;
  	border-bottom: 2px solid #FFFFFF; 
 } */
-#tileVoyEst , #tileVoyage, #tileLaytime , #tileRep, #tileVessel {
+#tileVoyEst , #tileVoyage, #tileLaytime , #tileRep, #tileVessel,#tileContract {
 	border: 1px solid #666666;
 	box-shadow: 5px 5px 7px #808888 !important;
 }
-#tileVoyEst:hover , #tileVoyage:hover, #tileVessel:hover, #tileLaytime:hover, #tileRep:hover{
+#tileVoyEst:hover , #tileVoyage:hover, #tileVessel:hover, #tileLaytime:hover, #tileRep:hover,#tileContract:hover{
 	box-shadow: 5px 7px 10px #000000!important;
 	background: #x000FFF;
 }
