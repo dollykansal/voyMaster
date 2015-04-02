@@ -35,6 +35,7 @@ public class VesselConverter extends AbstractConverter<VoyHeader, VesselData>{
 		target.setData2(createData2(voyageVessel));
 		target.setData3(createData3(voyageVessel));
 		target.setData4(createData4(voyageVessel));
+		target.setId(voyageVessel.getVoyageVesselId());
 	}
 
 	private List<VesselData4> createData4(VoyageVessel voyageVessel) {

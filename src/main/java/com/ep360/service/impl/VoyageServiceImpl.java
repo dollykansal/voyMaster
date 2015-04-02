@@ -12,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.ep360.controller.data.VesselData1;
+import com.ep360.controller.data.VesselData2;
+import com.ep360.controller.data.VesselData3;
+import com.ep360.controller.data.VesselData4;
 import com.ep360.dao.api.DBDataService;
 import com.ep360.data.models.Cargo;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.PortRotation;
 import com.ep360.data.models.VesselMaster;
-import com.ep360.data.models.VesselMasterId;
 import com.ep360.data.models.VoyHeader;
 import com.ep360.data.models.VoyageVessel;
 import com.ep360.service.api.VoyageService;
@@ -70,32 +73,50 @@ public class VoyageServiceImpl implements VoyageService {
 	private Object saveVessel(Map<Object, Object> reqData, VoyHeader voyHeader) {
 		VoyageVessel voyageVessel = new VoyageVessel();
 		voyageVessel.setVoyHeader(voyHeader);
-		Map<Object,Object> id = (Map<Object, Object>) reqData.get("id");
-		voyageVessel.setVesselName((String) id.get("vesselName"));
-		voyageVessel.setLaycan(getValueFloat(reqData.get("laycan")));
-		voyageVessel.setVesselType((String) id.get("vesselType"));
-		voyageVessel.setDwt(getValueFloat(reqData.get("dwt")));
-		voyageVessel.setDraft(reqData.get("draft")!=null?(String)reqData.get("draft"):null);
-		voyageVessel.setBallast(getValueFloat(reqData.get("ballast")));
-		voyageVessel.setLaden(getValueFloat(reqData.get("laden")));
-		voyageVessel.setDoDieselType(reqData.get("doDieselType")!=null?(String)reqData.get("doDieselType"):null);
-		voyageVessel.setDoSea(getValueFloat(reqData.get("doSea")));
-		voyageVessel.setDoIdle(getValueFloat(reqData.get("doIdle")));
-		voyageVessel.setDoWork(getValueFloat(reqData.get("doWork")));
-		voyageVessel.setLsdoDieselType(reqData.get("lsdoDieselType")!=null?(String)reqData.get("lsdoDieselType"):null);
-		voyageVessel.setLsdoSea(getValueFloat(reqData.get("lsdoSea")));
-		voyageVessel.setLsdoIdle(getValueFloat(reqData.get("lsdoIdle")));
-		voyageVessel.setLsdoWork(getValueFloat(reqData.get("lsdoWork")));
-		voyageVessel.setFoType(getValueFloat(reqData.get("foType")));
-		voyageVessel.setFoBallast(getValueFloat(reqData.get("foBallast")));
-		voyageVessel.setFoLaden(getValueFloat(reqData.get("foLaden")));
-		voyageVessel.setFoIdle(getValueFloat(reqData.get("foIdle")));
-		voyageVessel.setFoWork(getValueFloat(reqData.get("foWork")));
-		voyageVessel.setLsfoType(getValueFloat(reqData.get("lsfoType")));
-		voyageVessel.setLsfoBallast(getValueFloat(reqData.get("lsfoBallast")));
-		voyageVessel.setLsfoIdle(getValueFloat(reqData.get("lsfoIdle")));
-		voyageVessel.setLsfoLaden(getValueFloat(reqData.get("lsfoLaden")));
-		voyageVessel.setLsfoWork(getValueFloat(reqData.get("lsfoWork")));
+		if(reqData.get("id")!=null){
+			int voyageVesselId = (Integer) reqData.get("id");
+			voyageVessel.setVoyageVesselId(voyageVesselId);
+		}
+		List<Map<Object, Object>> data1List = (List<Map<Object, Object>>)reqData.get("data1");
+		Map<Object, Object> data1 = data1List.iterator().next();
+		List<Map<Object, Object>> data2List = (List<Map<Object, Object>>)reqData.get("data2");
+		Map<Object, Object> data2 = data2List.iterator().next();
+		List<Map<Object, Object>> data3List = (List<Map<Object, Object>>)reqData.get("data3");
+		List<Map<Object, Object>> data4List = (List<Map<Object, Object>>)reqData.get("data4");
+		voyageVessel.setVesselName((String)data1.get("mv"));
+		voyageVessel.setVesselType((String)data1.get("vesselType"));
+		voyageVessel.setDwt(getValue(data1.get("dwt")));
+		voyageVessel.setDraft((String)data1.get("draft"));
+		voyageVessel.setBallast(getValue(data2.get("ballast")));
+		voyageVessel.setLaden(getValue(data2.get("laden")));
+		for(Map<Object, Object> data:data3List){
+			if(((String)data.get("vesselName")).equalsIgnoreCase("DO")){
+				voyageVessel.setDoDieselType((String)data.get("dieselType"));
+				voyageVessel.setDoSea(getValue(data.get("sea")));
+				voyageVessel.setDoIdle(getValue(data.get("idle")));
+				voyageVessel.setDoWork(getValue(data.get("work")));
+			}else{
+				voyageVessel.setLsdoDieselType((String)data.get("dieselType"));
+				voyageVessel.setLsdoSea(getValue(data.get("sea")));
+				voyageVessel.setLsdoIdle(getValue(data.get("idle")));
+				voyageVessel.setLsdoWork(getValue(data.get("work")));
+			}
+		}
+		for(Map<Object, Object> data:data4List){
+			if(((String)data.get("vesselName")).equalsIgnoreCase("FO")){
+				voyageVessel.setFoType(getValue(data.get("fuelType")));
+				voyageVessel.setFoBallast(getValue(data.get("ballast")));
+				voyageVessel.setFoLaden(getValue(data.get("laden")));
+				voyageVessel.setFoIdle(getValue(data.get("idle")));
+				voyageVessel.setFoWork(getValue(data.get("work")));
+			}else{
+				voyageVessel.setLsfoType(getValue(data.get("fuelType")));
+				voyageVessel.setLsfoBallast(getValue(data.get("ballast")));
+				voyageVessel.setLsfoIdle(getValue(data.get("laden")));
+				voyageVessel.setLsfoLaden(getValue(data.get("idle")));
+				voyageVessel.setLsfoWork(getValue(data.get("work")));
+			}
+		}
 		return voyageVessel;
 	}
 	
@@ -115,6 +136,9 @@ public class VoyageServiceImpl implements VoyageService {
 		if(map!=null&& map.size()>0){
 			for(Map<Object, Object> reqData:map){
 				PortRotation port = new PortRotation();
+				if(reqData.get("portRotId")!=null){
+					port.setPortRotationId((Integer)reqData.get("portRotId"));
+				}
 				port.setType(reqData.get("cType")!=null?(String)reqData.get("cType"):null);
 				port.setPortName(reqData.get("coord")!=null?(String)reqData.get("coord"):null);
 				port.setDistance(getBigDecimalValue(reqData.get("distEca")));
@@ -144,6 +168,9 @@ public class VoyageServiceImpl implements VoyageService {
 		if(map!=null&& map.size()>0){
 			for(Map<Object, Object> reqData:map){
 				Cargo cargo = new Cargo();
+				if(reqData.get("cargoId")!=null){
+					cargo.setCargoId((Integer)reqData.get("cargoId"));
+				}
 				cargo.setAccount(reqData.get("account")!=null?(String)reqData.get("account"):null);
 				cargo.setCargoName(reqData.get("cargoNam")!=null?(String)reqData.get("cargoNam"):null);
 				cargo.setLoadingPort(reqData.get("loadPort")!=null?(String)reqData.get("loadPort"):null);
@@ -165,6 +192,9 @@ public class VoyageServiceImpl implements VoyageService {
 
 	private VoyHeader saveVoyageHeader(Map<Object, Object> reqData) {
 		VoyHeader voyHeader = new VoyHeader();
+		if(reqData.get("voyNo")!=null){
+			voyHeader.setVoyNo((Integer)reqData.get("voyNo"));
+		}
 		voyHeader.setDoCons(getValue(reqData.get("totDoCons")));
 		voyHeader.setDoExp(getValue(reqData.get("totDoExpense")));
 		voyHeader.setDoPrice(getValue(reqData.get("DoPrice")));
