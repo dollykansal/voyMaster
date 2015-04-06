@@ -36,9 +36,9 @@
 <script src="static/javascripts/vesselavail.js"></script> 
 <script src="static/javascripts/createTable.js"></script>
 <script src="static/javascripts/frtsim.js"></script>
-<!-- <script src="static/javascripts/ganttchart.js"></script>
+<script src="static/javascripts/contractRefCreate.js"></script>
 <script src="static/javascripts/stackedChartH.js"></script>
-<script src="static/javascripts/chart.js"></script> -->
+<script src="static/javascripts/chart.js"></script>
 <script src="static/javascripts/vesselMaster.js"></script>
 <script src="static/javascripts/header.js"></script>
 <script src="static/javascripts/final_cargo.js"></script>
