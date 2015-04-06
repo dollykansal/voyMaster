@@ -12,6 +12,8 @@ public class VesselData {
 	
 	private List<VesselData4> data4;
 	
+	private long id;
+	
 	public List<VesselData1> getData1() {
 		return data1;
 	}
@@ -42,5 +44,13 @@ public class VesselData {
 
 	public void setData4(List<VesselData4> data4) {
 		this.data4 = data4;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

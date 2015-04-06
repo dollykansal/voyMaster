@@ -66,13 +66,32 @@ sap.ui.jsview("static/voyageest.Home", {
 			sap.ui.getCore().byId("myShell").setContent(getContent("wi_vessel_id"));
 		})
 		
+		var oPanelContract = new sap.ui.commons.Panel("tileContract",{
+			showCollapseIcon: false,
+			width: "95%",
+			height: "180px",
+			layoutData: new sap.ui.layout.GridData({
+				span: "L2 M2 S2",
+				indent: "L3 M2 S1"
+			})
+		});
+		oPanelContract.setTitle(new sap.ui.core.Title({text:"Contract"}).setEmphasized(false));
+		oPanelContract.setAreaDesign(sap.ui.commons.enums.AreaDesign.Plain);
+		oPanelContract.setBorderDesign(sap.ui.commons.enums.BorderDesign.Box);
+		oPanelContract.addContent(new sap.ui.commons.Image({src: 'static/images/image_green.gif'}));
+		oPanelContract.attachBrowserEvent("click", function(){
+			sap.ui.getCore().byId("myShell").setSelectedWorksetItem("wi_contract_id");
+			sap.ui.getCore().byId("myShell").setContent(getContent("wi_cont_overview"));
+		})
+		
+		
 		var oPanelLaytime = new sap.ui.commons.Panel("tileLaytime",{
 			showCollapseIcon: false,
 			width: "95%",
 			height: "180px",
 			layoutData: new sap.ui.layout.GridData({
 				span: "L2 M2 S2",
-				indent: "L4 M3 S2"
+				//indent: "L4 M3 S2"
 			})
 		});
 /*		oPanelDemand.setTitle(new sap.ui.core.Title({text:"Demands"}).setEmphasized(false));
@@ -116,10 +135,11 @@ sap.ui.jsview("static/voyageest.Home", {
 			alert("Tile Pressed");
 		})
 		
+		
 		var oGridTiles = new sap.ui.layout.Grid("gridTile",{
 				hSpacing: 2,
 				vSpacing: 2, 	
-				content: [ oPanelVoyEst,oPanelVoyage,oPanelVessel,oPanelLaytime,oPanelRep
+				content: [ oPanelVoyEst,oPanelVoyage,oPanelVessel,oPanelContract,oPanelLaytime,oPanelRep
 				]
 			});
 		return oGridTiles;

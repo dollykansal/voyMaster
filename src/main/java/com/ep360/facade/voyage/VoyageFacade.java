@@ -21,5 +21,7 @@ public interface VoyageFacade {
 	
 	public Map<String,Object> saveData(Map<Object,Object> reqData, String username);
 	
+	public Map<String,Object> saveVesselData(Map<Object,Object> reqData, String username);
+	
 	public List<Demand> getDemands();
 }
