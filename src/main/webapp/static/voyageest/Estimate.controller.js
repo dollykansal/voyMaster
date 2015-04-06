@@ -36,7 +36,7 @@ sap.ui.controller("static/voyageest.Estimate", {
 //	}
 	selectVessel: function(rowNo) {
 		var vesselMasterData = sap.ui.getCore().getModel("vesselMaster").getData()['modelData'][rowNo];
-		var data1_new = [{mv:vesselMasterData.id.vesselName,vesselType:vesselMasterData.id.vesselType,dwt:vesselMasterData.dwt,draft:vesselMasterData.draft}];
+		var data1_new = [{mv:vesselMasterData.vesselName,vesselType:vesselMasterData.vesselType,dwt:vesselMasterData.dwt,draft:vesselMasterData.draft}];
 		var data2_new = [{ballast: vesselMasterData.ballast, laden: vesselMasterData.laden}];
 		var data3_new =[
 					{vesselName: "DO", dieselType: vesselMasterData.doDieselType, sea: vesselMasterData.doSea, idle: vesselMasterData.doIdle, work: vesselMasterData.doWork},

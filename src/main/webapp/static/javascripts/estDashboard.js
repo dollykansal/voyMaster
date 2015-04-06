@@ -20,11 +20,11 @@ var estDash = function(){
 			items: [new sap.ui.commons.Button({text: "Create New Estimate",
 				lite : true}),
 				
-			new sap.ui.commons.Button({text: "Copy and create new",lite : true
+			new sap.ui.commons.Button({text: "Copy and create new",
 			}),
-			new sap.ui.commons.Button({text: "Open estimate",lite : true
+			new sap.ui.commons.Button({text: "Open estimate"
 			}),		
-		new sap.ui.commons.Button({text: "Edit estimate",lite : true
+		new sap.ui.commons.Button({text: "Edit estimate"
 		}),
 			new sap.ui.commons.Button({text: "Compare Estimates"
 			})

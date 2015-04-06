@@ -1,4 +1,5 @@
 sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
+	///final vessel details
     createContent: function(oController) {
         var oDialogVessel = new sap.ui.commons.Dialog({title: "Vessel Details", height: "90%", width:"90%"});
 
@@ -140,7 +141,7 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	
 //////////////////////////////////////////////////////////////////////////    	
     	var oSimpleForm = new sap.ui.layout.form.SimpleForm(
-    			"sfVessel",
+    			//"sfVessel",
     			{
     				maxContainerCols: 5,
     				minWidth : 1024,
@@ -353,7 +354,7 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	
 
     	var oSimpleForm1 = new sap.ui.layout.form.SimpleForm(
-    			"sfMeasure",
+    			//"sfMeasure",
     			{
     				maxContainerCols: 3,
     				minWidth : 1024,
@@ -439,7 +440,7 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	oPanelVessel.setText("Gears & HA/HO");
     	//Create a matrix layout with 5 columns
     	var oMatrix = new sap.ui.commons.layout.MatrixLayout({
-    		id:"MatrixVessel",
+    		//id:"MatrixVessel",
     		layoutFixed : true,
     		width : '100%',
     		columns : 4
@@ -456,7 +457,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
             press: function(){oDialogVessel .close();}
         });
         oDialogVessel.addButton(oButton);
-
+        
+        var panelSpeed =  new Vessel();
+        oDialogVessel.addContent(panelSpeed);
+        
         return oDialogVessel;
     }
 });

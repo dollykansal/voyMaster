@@ -81,7 +81,7 @@ sap.ui.jsview("static/voyageest.Home", {
 		oPanelContract.addContent(new sap.ui.commons.Image({src: 'static/images/image_green.gif'}));
 		oPanelContract.attachBrowserEvent("click", function(){
 			sap.ui.getCore().byId("myShell").setSelectedWorksetItem("wi_contract_id");
-			sap.ui.getCore().byId("myShell").setContent(getContent("wi_contract_id"));
+			sap.ui.getCore().byId("myShell").setContent(getContent("wi_cont_overview"));
 		})
 		
 		

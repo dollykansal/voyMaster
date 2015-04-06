@@ -49,11 +49,6 @@ public class VesselMaster  implements java.io.Serializable {
      private Float lsfoLaden;
      private Float lsfoIdle;
      private Float lsfoWork;
-     private Set vesselDatas = new HashSet(0);
-     private Set vesselHoldDimensions = new HashSet(0);
-     private Set vesselHatchDimensions = new HashSet(0);
-     private Set vesselGears = new HashSet(0);
-     private Set vesselHoldCapacities = new HashSet(0);
 
     public VesselMaster() {
     }
@@ -89,11 +84,6 @@ public class VesselMaster  implements java.io.Serializable {
        this.lsfoLaden = lsfoLaden;
        this.lsfoIdle = lsfoIdle;
        this.lsfoWork = lsfoWork;
-       this.vesselDatas = vesselDatas;
-       this.vesselHoldDimensions = vesselHoldDimensions;
-       this.vesselHatchDimensions = vesselHatchDimensions;
-       this.vesselGears = vesselGears;
-       this.vesselHoldCapacities = vesselHoldCapacities;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -358,50 +348,8 @@ public class VesselMaster  implements java.io.Serializable {
         this.lsfoWork = lsfoWork;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="vesselMaster")
-    public Set getVesselDatas() {
-        return this.vesselDatas;
-    }
-    
-    public void setVesselDatas(Set vesselDatas) {
-        this.vesselDatas = vesselDatas;
-    }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="vesselMaster")
-    public Set getVesselHoldDimensions() {
-        return this.vesselHoldDimensions;
-    }
-    
-    public void setVesselHoldDimensions(Set vesselHoldDimensions) {
-        this.vesselHoldDimensions = vesselHoldDimensions;
-    }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="vesselMaster")
-    public Set getVesselHatchDimensions() {
-        return this.vesselHatchDimensions;
-    }
-    
-    public void setVesselHatchDimensions(Set vesselHatchDimensions) {
-        this.vesselHatchDimensions = vesselHatchDimensions;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="vesselMaster")
-    public Set getVesselGears() {
-        return this.vesselGears;
-    }
-    
-    public void setVesselGears(Set vesselGears) {
-        this.vesselGears = vesselGears;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="vesselMaster")
-    public Set getVesselHoldCapacities() {
-        return this.vesselHoldCapacities;
-    }
-    
-    public void setVesselHoldCapacities(Set vesselHoldCapacities) {
-        this.vesselHoldCapacities = vesselHoldCapacities;
-    }
 
 
 

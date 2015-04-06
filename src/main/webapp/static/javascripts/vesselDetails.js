@@ -1,4 +1,5 @@
 sap.ui.jsfragment("vesselDetails.fragments.JSFragmentDialog", {
+	///////delete thsi file
     createContent: function(oController) {
     	var oDialog = new sap.ui.commons.Dialog({title: "Vessel Details"});
 
@@ -185,9 +186,7 @@ sap.ui.jsfragment("vesselDetails.fragments.JSFragmentDialog", {
         press: function(){oDialog .close();}
     });
     oDialog.addButton(oButton);
-    
-    var panelSpeed =  new Vessel();
-    oDialog.addContent(panelSpeed);
+
 	return oDialog;
     }
 });

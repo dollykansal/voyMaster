@@ -33,6 +33,7 @@
 <script src="static/javascripts/vesselDashboard.js"></script>
 <script src="static/javascripts/summary.js"></script>
 <script src="static/javascripts/contract.js"></script>
+<script src="static/javascripts/contractDash.js"></script>
 <!-- <script type="text/javascript"
 	src="static/vendor/fusioncharts-suite-xt/js/fusioncharts.js"></script>
 <script type="text/javascript"
@@ -84,12 +85,20 @@
 					              }),
 					              new sap.ui.ux3.NavigationItem("wi_vessel_id",{
 					            	  key: "Vessel_master",
-					            	  text: "Vessel Master"
+					            	  text: "Vessel Master",
+					            	  subItems:[
+					             				new sap.ui.ux3.NavigationItem({key:"wi_vessel_overview",text:"Overview"}),
+					             				new sap.ui.ux3.NavigationItem({key:"wi_vessel_create",text:"Vessel"})
+					              				]
 					              }),
 					              ,
 					              new sap.ui.ux3.NavigationItem("wi_contract_id",{
 					            	  key: "Contract_master",
-					            	  text: "Contract"
+					            	  text: "Contract",
+					            	  subItems:[
+					             				new sap.ui.ux3.NavigationItem({key:"wi_cont_overview",text:"Overview"}),
+					             				new sap.ui.ux3.NavigationItem({key:"wi_cont_create",text:"Contract"})
+					              				]
 					              })
 					              ],
 /*  					  worksetItemSelected: function (e){
@@ -149,9 +158,15 @@
 							mContent[id] = new estDash();
 						}else if (id == "wi_laytime_id") {
 							mContent[id] = sap.ui.getCore().byId("laytimeViewId");
-						}else if (id == "wi_vessel_id") {
+						}else if (id == "wi_vessel_overview") {
 							mContent[id] = sap.ui.getCore().byId("vesselViewId");
-						}else if (id == "wi_contract_id") {
+						}else if (id == "wi_vessel_create") {
+							var oDialogVessel = sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog");
+							mContent[id] = oDialogVessel;
+							
+						}else if (id == "wi_cont_overview") {
+							mContent[id] = new contractDash();
+						}else if (id == "wi_cont_create") {
 							mContent[id] = sap.ui.getCore().byId("contractViewId");
 						}
 					}else{

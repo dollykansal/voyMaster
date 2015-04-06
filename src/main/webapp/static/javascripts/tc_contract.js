@@ -119,60 +119,19 @@ var contract = function(){
 		visibleRowCount: 3,
 		firstVisibleRow: 2
 	});
-	//Define the columns and the control templates to be used
-	var oPortLink = new sap.ui.commons.Link({
-		press: function() {
-			//oDialogLaytime.open();
-			}
-	});
-	oPortLink.bindProperty("text", "port");
-	oTableLaytime.addColumn(new sap.ui.table.Column({
-		label: new sap.ui.commons.Label({text: "Port"}), 
-		template: oPortLink,  
-		width: "40px",
-		editable: false}));
 	
-	var oCbCalGrp = new sap.ui.commons.ComboBox("cbCalGrp",{
-		  tooltip: "Calculate Group",
-		  items: [new sap.ui.core.ListItem({text: "Reversed", key: "1"}),
-		          new sap.ui.core.ListItem({text: "Averaged", key: "2"}),
-		          new sap.ui.core.ListItem({text: "Normal", key: "3"}),
-		          ],
-		  });
-	oCbCalGrp.bindProperty("value", "calGroup");
-
-	oTableLaytime.addColumn(new sap.ui.table.Column("calGroup",{
-		label: new sap.ui.commons.Label({text: "Calculate Group"}), 
-		template: oCbCalGrp,
-		width: "40px" }));
-	oTableLaytime.addColumn(window.helper.createColumn("proRata", "ProRata", "20px", "CH"));
+	oTableLaytime.addColumn(window.helper.createColumn("schType", "Schedule Type", "40px", "TF"));
+	oTableLaytime.addColumn(window.helper.createColumn("actArrival", "Actual Arrival", "40px", "TF"));
+	oTableLaytime.addColumn(window.helper.createColumn("timezone", "TimeZone", "40px", "TF"));
+	oTableLaytime.addColumn(window.helper.createColumn("laycanFrom", "Laycan From", "40px", "TF"));
 	
-	var oCbAct = new sap.ui.commons.ComboBox("cbAct",{
-		  tooltip: "Loading\Discharging",
-		  items: [
-		          new sap.ui.core.ListItem({text: "Loading", key: "Lo"}),
-		          new sap.ui.core.ListItem({text: "Discharging", key: "Di"})
-		          ],
-		  });
-	oCbAct.bindProperty("value", "cbAct");
-	oTableLaytime.addColumn(new sap.ui.table.Column({
-		label: new sap.ui.commons.Label({text: "Activity"}), 
-		template: oCbAct,
-		width: "40px" }));
-	
-	oTableLaytime.addColumn(window.helper.createColumn("totQty", "Total Qty", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("dayAllow", "Days Allowed", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("hrsAllow", "Hours Allowed", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("minAllow", "Mins Allowed", "40px", "TF"));
-	
-	oTableLaytime.addColumn(window.helper.createColumn("demm", "Demmurage", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("despatch", "Despatch", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("commDemm", "Add. Commission Demm.", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("brokDemm", "Broker Demm. Charge", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("addDemm", "Add. Demm.", "40px", "TF"));
-	oTableLaytime.addColumn(window.helper.createColumn("budgDemm", "Budgeted Demm.", "40px", "TF"));
+	oTableLaytime.addColumn(window.helper.createColumn("laycanTo", "Laycan To", "40px", "TF"));
+	oTableLaytime.addColumn(window.helper.createColumn("fixed", "Fixed", "20px", "CH"));
+	oTableLaytime.addColumn(window.helper.createColumn("duration", "Duration", "40px", "TF"));
+	oTableLaytime.addColumn(window.helper.createColumn("durUom", "Duration UOM", "40px", "TF"));
 	var aData = [
-	         	{port: "Abu Dhabhi", cbAct:"Discharging"}
+	         	{schType: "Delivery Cost", timezone:"UTC"},
+	         	{schType: "Redelivery Cost", timezone:"UTC"},
 	         ];
 	var oModel = new sap.ui.model.json.JSONModel();
 	oModel.setData({modelData: aData});
@@ -182,7 +141,7 @@ var contract = function(){
 	var oPanelLaytime = new sap.ui.commons.Panel({
 		width : "100%"
 	});
-	oPanelLaytime.setText("Laytime");
+	oPanelLaytime.setText("Laycan");
 	var oButtonLaytime = 		new sap.ui.commons.Button({
 		text : "Laytime Calculation",
 		//lite : true,
@@ -192,46 +151,6 @@ var contract = function(){
 	oButtonLaytime.addStyleClass("myGraphBtn");
 	oPanelLaytime.addButton( oButtonLaytime);
 	oPanelLaytime.addContent(oTableLaytime);
-//////////////////////////////////////////Table for Cargo//////////////////////////////////////////////////
-	//Create an instance of the table control
-	var oTableCargo = window.helper.createTable({
-		visibleRowCount: 3,
-		editable: false
-	});
-
-	oTableCargo.addColumn(window.helper.createColumn("loadPort", "Loading Port", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("disPort", "Discharging Port", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("qty", "Quantity", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("frt", "Frt", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("term", "Term", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("rev", "Revenue", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("addComm", "A.Comm", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("brkg", "Brkg", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("frtTax", "Frt Tax", "40px", "TF"));
-	oTableCargo.addColumn(window.helper.createColumn("linTerm", "Liner Term", "40px", "TF"));
-	
-	var aDataCargo = [
-		         	{sNo: "1", account: "Seafuture", cargoNam: "Hot Coil", qty:"32,000.00", term: "FIO"}
-		         ];
-		var oModelCargo = new sap.ui.model.json.JSONModel();
-		oModelCargo.setData({modelData: aDataCargo});
-		oTableCargo.setModel(oModelCargo);
-		oTableCargo.bindRows("/modelData");
-		
-		
-		var oPanelCargo = new sap.ui.commons.Panel({
-			width : "100%"
-		});
-		oPanelCargo.setText("Cargo");
-		var oButtonLink = 		new sap.ui.commons.Button({
-			text : "Edit Voyage",
-			//lite : true,
-			style: sap.ui.commons.ButtonStyle.Emph,
-			press: function() { }
-		});
-		oButtonLink.addStyleClass("myGraphBtn");
-		oPanelCargo.addButton( oButtonLink);
-		oPanelCargo.addContent(oTableCargo);
 	
 //////////////////////////////////////////Table for Partner//////////////////////////////////////////////////
 		//Create an instance of the table control

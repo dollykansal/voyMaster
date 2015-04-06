@@ -22,7 +22,7 @@ var Vessel = function(oController){
 //		creating table using helper
 		var oTableVess = window.helper.createTable({
 			//title: "Selected Vessel Particular",
-			id: "iddemo",
+			//id: "iddemo",
 			toolbar: new sap.ui.commons.Toolbar({items: [ 
 			                                             new sap.ui.commons.Button({text: "Edit", press: function() { alert("Edit Button pressed!"); }}),
 			                                             new sap.ui.commons.Button({text: "List", press: function() { alert("List Button pressed!"); }}),
@@ -43,7 +43,8 @@ var Vessel = function(oController){
 		oColumn.setMenu(oCustomMenu);
 		oTableVess.addColumn(oColumn);
 		
-		var oComboBox = new sap.ui.commons.ComboBox("ComboBox1",{
+		//var oComboBox = new sap.ui.commons.ComboBox("ComboBox1",{
+			var oComboBox = new sap.ui.commons.ComboBox({
 			  tooltip: "Type",
 			  items: [new sap.ui.core.ListItem({text: "OWNED", key: "O"}),
 			          new sap.ui.core.ListItem({text: "TCT", key: "T"}),
@@ -82,7 +83,8 @@ var Vessel = function(oController){
 		var oTableDo = window.helper.createTable({visibleRowCount: 2,firstVisibleRow: 2});
 		//Define the columns and the control templates to be used
 		oTableDo.addColumn(window.helper.createColumn1("vesselName", "VesselName", "50px", "TF"));
-		var oComboBox = new sap.ui.commons.ComboBox("ComboBox2",{
+		//var oComboBox = new sap.ui.commons.ComboBox("ComboBox2",{
+			var oComboBox = new sap.ui.commons.ComboBox({
 			  tooltip: "Type",
 			  items: [new sap.ui.core.ListItem({text: "DMA", key: "D1"}),
 			          new sap.ui.core.ListItem({text: "DMB", key: "D2"}),
@@ -108,7 +110,8 @@ var Vessel = function(oController){
 		var oTableFo = window.helper.createTable({visibleRowCount: 2,firstVisibleRow: 2});
 		//Define the columns and the control templates to be used
 		oTableFo.addColumn(window.helper.createColumn1("vesselName", "VesselName", "50px", "TV"));
-		var oComboBox = new sap.ui.commons.ComboBox("ComboBox3",{
+		//var oComboBox = new sap.ui.commons.ComboBox("ComboBox3",{
+		var oComboBox = new sap.ui.commons.ComboBox({
 			  tooltip: "Type",
 			  items: [new sap.ui.core.ListItem({text: "30", key: "30"}),
 			          new sap.ui.core.ListItem({text: "40", key: "40"}),
@@ -135,7 +138,7 @@ var Vessel = function(oController){
 	/////////////////////////////////////////Panel & Matrix Vessel  ///////////////////////////////////////////////////////////////////
 		//Create a panel instance
 		var oPanel = new sap.ui.commons.Panel({
-			id: "Panel1",
+			//id: "Panel1",
 			width : "100%"
 		});
 		//Function to create the dialog
@@ -162,7 +165,7 @@ var Vessel = function(oController){
 		oPanel.addButton( oButton3);
 		//Create a matrix layout with 5 columns
 		var oMatrix = new sap.ui.commons.layout.MatrixLayout({
-			id:"Matrix1",
+			//id:"Matrix1",
 			layoutFixed : true,
 			width : '100%',
 			columns : 5

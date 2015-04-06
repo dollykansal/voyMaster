@@ -13,6 +13,8 @@ sap.ui.jsview("static.voyageest.Contract", {
 	* @memberOf static.voyageest.Contract
 	*/ 
 	createContent : function(oController) {
+		var form = new contract();
+		return form;
 	}
 
 });
