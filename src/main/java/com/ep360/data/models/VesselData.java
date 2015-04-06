@@ -2,14 +2,15 @@ package com.ep360.data.models;
 // Generated Apr 2, 2015 11:37:37 PM by Hibernate Tools 4.3.1
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -114,7 +115,7 @@ public class VesselData  implements java.io.Serializable {
         this.vesselDataId = vesselDataId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="vessel_master_id", unique=true, nullable=false)
     public VesselMaster getVesselMaster() {
         return this.vesselMaster;

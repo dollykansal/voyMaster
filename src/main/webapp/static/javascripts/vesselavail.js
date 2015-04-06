@@ -12,12 +12,10 @@ var dbData = sap.ui.getCore().getModel("dbData").getData();
 var aData = dbData['vessels'];
 //Create an instance of the table control
 var oTableVess = window.helper.createTable({title:"Vessel Availability"});
-
-var oDialogVessel = sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog");
 var oControl = new sap.ui.commons.Link({
-	press: function() {oDialogVessel.open();}
+	press: function() {oController.onClickVessel();}
 });
-oControl.bindProperty("text", "id/vesselName");
+oControl.bindProperty("text", "vesselName");
 oTableVess.addColumn(new sap.ui.table.Column({
 	label: new sap.ui.commons.Label({text: "Vessel Name"}), 
 	template: oControl, //sortProperty: "id.vesselName", 

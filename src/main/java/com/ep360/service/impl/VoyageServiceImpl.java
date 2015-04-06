@@ -57,6 +57,13 @@ public class VoyageServiceImpl implements VoyageService {
 	}
 
 	@Override
+	public void saveVesselData(Map<Object, Object> reqData, String username) {
+		//TODO:Save logic
+		System.out.println("Hold Plz");
+		
+	}
+
+	@Override
 	public void saveData(Map<Object, Object> reqData, String username) {
 		if(reqData.get("modelSum")!=null && reqData.get("cargo")!=null && reqData.get("port")!=null){
 			List<Object> entities = new ArrayList<Object>();

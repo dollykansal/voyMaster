@@ -58,6 +58,13 @@ public class VoyageFacadeImpl implements VoyageFacade{
 	}
 
 	@Override
+	public Map<String, Object> saveVesselData(Map<Object, Object> reqData,
+			String username) {
+		voyageService.saveVesselData(reqData, username);
+		return null;
+	}
+
+	@Override
 	public List<Demand> getDemands() {
 		return voyageService.getDemands();
 	}

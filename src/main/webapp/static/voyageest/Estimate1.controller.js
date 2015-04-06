@@ -587,5 +587,12 @@ getVesselValues: function() {
 				model.setProperty("/netDays",oTotDays);
 				sap.ui.getCore().setModel(model,"model");
 			},
-	
+			checkForNumeric:function(){
+				if(!$.isNumeric(this.getProperty("value"))){
+		            this.setProperty("valueState",sap.ui.core.ValueState.Error);
+		        }
+		        else{
+//		        	this.setProperty("valueState",sap.ui.core.ValueState.Success);
+		        }
+			}
 });

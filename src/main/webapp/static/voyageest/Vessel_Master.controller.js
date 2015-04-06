@@ -34,5 +34,4 @@ sap.ui.controller("static.voyageest.Vessel_Master", {
 //	onExit: function() {
 //
 //	}
-
 });

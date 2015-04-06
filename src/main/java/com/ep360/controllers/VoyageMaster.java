@@ -71,4 +71,16 @@ public class VoyageMaster {
 		}
 		return response;
 	}
+	
+	@RequestMapping(value = "/saveVesselData")
+	@ResponseBody
+	public Map<String,String> saveVesselData(@RequestBody Map<Object,Object> reqData){
+		UserDetails auth = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Map<String,String> response = new HashMap<String, String>();
+		response.put("result","success");
+		if(reqData!=null){
+			vesselFacade.saveData(reqData, auth.getUsername());
+		}
+		return response;
+	}
 }

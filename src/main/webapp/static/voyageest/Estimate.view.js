@@ -19,7 +19,7 @@ sap.ui.jsview("static/voyageest.Estimate", {
 		//panel = new Vessel().createVessel(oController);
 		panel = new Vessel(oController);
 		var vessel = new Vesselavail(oController);
-		window.v = panel;
+//		window.v = panel;
 		var button = new sap.ui.commons.Button({ 
 			text: "Fill Cargo details to selected vessel -->",
 		   press : function() {
