@@ -22,7 +22,9 @@ var TableHelper = function(){
 			columnHeaderHeight:options.columnHeaderHeight,
 			rowHeight:options.rowHeight,
 			columnHeight:options.columnHeight,
-			toolbar:options.toolbar
+			toolbar:options.toolbar,
+			showColumnVisibilityMenu:options.showColumnVisibilityMenu,
+			enableColumnFreeze:options.enableColumnFreeze
 		});
 		return oTable;
 	},

@@ -22,38 +22,42 @@ import javax.persistence.Table;
 public class VoyageVessel  implements java.io.Serializable {
 
 
-     private Integer voyageVesselId;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2400020044150959007L;
+	private Integer voyageVesselId;
      private VoyHeader voyHeader;
      private String vesselName;
-     private Float laycan;
+     private Double laycan;
      private String vesselType;
-     private Float dwt;
+     private Double dwt;
      private String draft;
-     private Float ballast;
-     private Float laden;
+     private Double ballast;
+     private Double laden;
      private String doDieselType;
-     private Float doSea;
-     private Float doIdle;
-     private Float doWork;
+     private Double doSea;
+     private Double doIdle;
+     private Double doWork;
      private String lsdoDieselType;
-     private Float lsdoSea;
-     private Float lsdoIdle;
-     private Float lsdoWork;
-     private Float foType;
-     private Float foBallast;
-     private Float foLaden;
-     private Float foIdle;
-     private Float foWork;
-     private Float lsfoType;
-     private Float lsfoBallast;
-     private Float lsfoLaden;
-     private Float lsfoIdle;
-     private Float lsfoWork;
+     private Double lsdoSea;
+     private Double lsdoIdle;
+     private Double lsdoWork;
+     private Double foType;
+     private Double foBallast;
+     private Double foLaden;
+     private Double foIdle;
+     private Double foWork;
+     private Double lsfoType;
+     private Double lsfoBallast;
+     private Double lsfoLaden;
+     private Double lsfoIdle;
+     private Double lsfoWork;
 
     public VoyageVessel() {
     }
 
-    public VoyageVessel(VoyHeader voyHeader, String vesselName, Float laycan, String vesselType, Float dwt, String draft, Float ballast, Float laden, String doDieselType, Float doSea, Float doIdle, Float doWork, String lsdoDieselType, Float lsdoSea, Float lsdoIdle, Float lsdoWork, Float foType, Float foBallast, Float foLaden, Float foIdle, Float foWork, Float lsfoType, Float lsfoBallast, Float lsfoLaden, Float lsfoIdle, Float lsfoWork) {
+    public VoyageVessel(VoyHeader voyHeader, String vesselName, Double laycan, String vesselType, Double dwt, String draft, Double ballast, Double laden, String doDieselType, Double doSea, Double doIdle, Double doWork, String lsdoDieselType, Double lsdoSea, Double lsdoIdle, Double lsdoWork, Double foType, Double foBallast, Double foLaden, Double foIdle, Double foWork, Double lsfoType, Double lsfoBallast, Double lsfoLaden, Double lsfoIdle, Double lsfoWork) {
        this.voyHeader = voyHeader;
        this.vesselName = vesselName;
        this.laycan = laycan;
@@ -116,11 +120,11 @@ public class VoyageVessel  implements java.io.Serializable {
 
     
     @Column(name="laycan", precision=12, scale=0)
-    public Float getLaycan() {
+    public Double getLaycan() {
         return this.laycan;
     }
     
-    public void setLaycan(Float laycan) {
+    public void setLaycan(Double laycan) {
         this.laycan = laycan;
     }
 
@@ -136,11 +140,11 @@ public class VoyageVessel  implements java.io.Serializable {
 
     
     @Column(name="dwt", precision=10)
-    public Float getDwt() {
+    public Double getDwt() {
         return this.dwt;
     }
     
-    public void setDwt(Float dwt) {
+    public void setDwt(Double dwt) {
         this.dwt = dwt;
     }
 
@@ -156,21 +160,21 @@ public class VoyageVessel  implements java.io.Serializable {
 
     
     @Column(name="ballast", precision=12, scale=0)
-    public Float getBallast() {
+    public Double getBallast() {
         return this.ballast;
     }
     
-    public void setBallast(Float ballast) {
+    public void setBallast(Double ballast) {
         this.ballast = ballast;
     }
 
     
     @Column(name="laden", precision=12, scale=0)
-    public Float getLaden() {
+    public Double getLaden() {
         return this.laden;
     }
     
-    public void setLaden(Float laden) {
+    public void setLaden(Double laden) {
         this.laden = laden;
     }
 
@@ -186,31 +190,31 @@ public class VoyageVessel  implements java.io.Serializable {
 
     
     @Column(name="do_sea", precision=12, scale=0)
-    public Float getDoSea() {
+    public Double getDoSea() {
         return this.doSea;
     }
     
-    public void setDoSea(Float doSea) {
+    public void setDoSea(Double doSea) {
         this.doSea = doSea;
     }
 
     
     @Column(name="do_idle", precision=12, scale=0)
-    public Float getDoIdle() {
+    public Double getDoIdle() {
         return this.doIdle;
     }
     
-    public void setDoIdle(Float doIdle) {
+    public void setDoIdle(Double doIdle) {
         this.doIdle = doIdle;
     }
 
     
     @Column(name="do_work", precision=12, scale=0)
-    public Float getDoWork() {
+    public Double getDoWork() {
         return this.doWork;
     }
     
-    public void setDoWork(Float doWork) {
+    public void setDoWork(Double doWork) {
         this.doWork = doWork;
     }
 
@@ -226,131 +230,131 @@ public class VoyageVessel  implements java.io.Serializable {
 
     
     @Column(name="lsdo_sea", precision=12, scale=0)
-    public Float getLsdoSea() {
+    public Double getLsdoSea() {
         return this.lsdoSea;
     }
     
-    public void setLsdoSea(Float lsdoSea) {
+    public void setLsdoSea(Double lsdoSea) {
         this.lsdoSea = lsdoSea;
     }
 
     
     @Column(name="lsdo_idle", precision=12, scale=0)
-    public Float getLsdoIdle() {
+    public Double getLsdoIdle() {
         return this.lsdoIdle;
     }
     
-    public void setLsdoIdle(Float lsdoIdle) {
+    public void setLsdoIdle(Double lsdoIdle) {
         this.lsdoIdle = lsdoIdle;
     }
 
     
     @Column(name="lsdo_work", precision=12, scale=0)
-    public Float getLsdoWork() {
+    public Double getLsdoWork() {
         return this.lsdoWork;
     }
     
-    public void setLsdoWork(Float lsdoWork) {
+    public void setLsdoWork(Double lsdoWork) {
         this.lsdoWork = lsdoWork;
     }
 
     
     @Column(name="fo_type", precision=12, scale=0)
-    public Float getFoType() {
+    public Double getFoType() {
         return this.foType;
     }
     
-    public void setFoType(Float foType) {
+    public void setFoType(Double foType) {
         this.foType = foType;
     }
 
     
     @Column(name="fo_ballast", precision=12, scale=0)
-    public Float getFoBallast() {
+    public Double getFoBallast() {
         return this.foBallast;
     }
     
-    public void setFoBallast(Float foBallast) {
+    public void setFoBallast(Double foBallast) {
         this.foBallast = foBallast;
     }
 
     
     @Column(name="fo_laden", precision=12, scale=0)
-    public Float getFoLaden() {
+    public Double getFoLaden() {
         return this.foLaden;
     }
     
-    public void setFoLaden(Float foLaden) {
+    public void setFoLaden(Double foLaden) {
         this.foLaden = foLaden;
     }
 
     
     @Column(name="fo_idle", precision=12, scale=0)
-    public Float getFoIdle() {
+    public Double getFoIdle() {
         return this.foIdle;
     }
     
-    public void setFoIdle(Float foIdle) {
+    public void setFoIdle(Double foIdle) {
         this.foIdle = foIdle;
     }
 
     
     @Column(name="fo_work", precision=12, scale=0)
-    public Float getFoWork() {
+    public Double getFoWork() {
         return this.foWork;
     }
     
-    public void setFoWork(Float foWork) {
+    public void setFoWork(Double foWork) {
         this.foWork = foWork;
     }
 
     
     @Column(name="lsfo_type", precision=12, scale=0)
-    public Float getLsfoType() {
+    public Double getLsfoType() {
         return this.lsfoType;
     }
     
-    public void setLsfoType(Float lsfoType) {
+    public void setLsfoType(Double lsfoType) {
         this.lsfoType = lsfoType;
     }
 
     
     @Column(name="lsfo_ballast", precision=12, scale=0)
-    public Float getLsfoBallast() {
+    public Double getLsfoBallast() {
         return this.lsfoBallast;
     }
     
-    public void setLsfoBallast(Float lsfoBallast) {
+    public void setLsfoBallast(Double lsfoBallast) {
         this.lsfoBallast = lsfoBallast;
     }
 
     
     @Column(name="lsfo_laden", precision=12, scale=0)
-    public Float getLsfoLaden() {
+    public Double getLsfoLaden() {
         return this.lsfoLaden;
     }
     
-    public void setLsfoLaden(Float lsfoLaden) {
+    public void setLsfoLaden(Double lsfoLaden) {
         this.lsfoLaden = lsfoLaden;
     }
 
     
     @Column(name="lsfo_idle", precision=12, scale=0)
-    public Float getLsfoIdle() {
+    public Double getLsfoIdle() {
         return this.lsfoIdle;
     }
     
-    public void setLsfoIdle(Float lsfoIdle) {
+    public void setLsfoIdle(Double lsfoIdle) {
         this.lsfoIdle = lsfoIdle;
     }
 
     
     @Column(name="lsfo_work", precision=12, scale=0)
-    public Float getLsfoWork() {
+    public Double getLsfoWork() {
         return this.lsfoWork;
     }
     
-    public void setLsfoWork(Float lsfoWork) {
+    public void setLsfoWork(Double lsfoWork) {
         this.lsfoWork = lsfoWork;
     }
 

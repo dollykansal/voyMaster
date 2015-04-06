@@ -1,7 +1,8 @@
 sap.ui.jsfragment("bunkCal.fragments.JSFragmentDialog", {
     createContent: function(oController) {
         var oDialog = new sap.ui.commons.Dialog({title: "Bunker Expense Details"});
-
+        var oModel = new sap.ui.model.json.JSONModel();
+        sap.ui.getCore().setModel(oModel, "modelSumm");
         var oSimpleForm = new sap.ui.layout.form.SimpleForm(
         		"sf1",
         		{
@@ -76,7 +77,7 @@ sap.ui.jsfragment("bunkCal.fragments.JSFragmentDialog", {
         					new sap.ui.commons.TextField({value:"{modelSumm>/lsDoWorkExpense}", editable: false}),
         					]
         		});
-        			
+        oSimpleForm.setModel(oModel);
     	oDialog.addContent(oSimpleForm);
     	oDialog.setWidth('80%');
     	oDialog.setHeight('65%');

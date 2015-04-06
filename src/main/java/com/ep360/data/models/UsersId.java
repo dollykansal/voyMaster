@@ -12,7 +12,11 @@ import javax.persistence.Embeddable;
 public class UsersId  implements java.io.Serializable {
 
 
-     private String userName;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1741529014240037844L;
+	private String userName;
      private String password;
 
     public UsersId() {

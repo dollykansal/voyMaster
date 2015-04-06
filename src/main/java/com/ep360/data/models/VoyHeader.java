@@ -30,7 +30,11 @@ import javax.persistence.TemporalType;
 public class VoyHeader  implements java.io.Serializable {
 
 
-     private Integer voyNo;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2467830392113459025L;
+	private Integer voyNo;
      private String tenantId;
      private String clientId;
      private String voyType;
@@ -694,7 +698,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.lastCreatedBy = lastCreatedBy;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
+@OneToMany(fetch=FetchType.EAGER, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<VoyageVessel> getVoyageVessels() {
         return this.voyageVessels;
     }
@@ -703,7 +707,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.voyageVessels = voyageVessels;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
+@OneToMany(fetch=FetchType.EAGER, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<PortRotation> getPortRotations() {
         return this.portRotations;
     }
@@ -712,7 +716,7 @@ public class VoyHeader  implements java.io.Serializable {
         this.portRotations = portRotations;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
+@OneToMany(fetch=FetchType.EAGER, mappedBy="voyHeader", cascade=CascadeType.PERSIST)
     public Set<Cargo> getCargos() {
         return this.cargos;
     }

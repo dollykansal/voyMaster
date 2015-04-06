@@ -36,6 +36,9 @@ sap.ui.controller("static/voyageest.Estimate", {
 //	}
 	selectVessel: function(rowNo) {
 		var vesselMasterData = sap.ui.getCore().getModel("vesselMaster").getData()['modelData'][rowNo];
+		var oModel = new sap.ui.model.json.JSONModel();
+		oModel.setData({modelData: vesselMasterData});
+		sap.ui.getCore().setModel(oModel,"selectedVessel");
 		var data1_new = [{mv:vesselMasterData.vesselName,vesselType:vesselMasterData.vesselType,dwt:vesselMasterData.dwt,draft:vesselMasterData.draft}];
 		var data2_new = [{ballast: vesselMasterData.ballast, laden: vesselMasterData.laden}];
 		var data3_new =[
@@ -50,5 +53,17 @@ sap.ui.controller("static/voyageest.Estimate", {
 	
 	getSelectedVessel: function() {
 		//return vesselName;
+	},
+	onClickVessel: function(){
+		var oDialogVessel = sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", this);  
+		oDialogVessel.open();
+	},
+	checkForNumeric:function(value){
+		if(!$.isNumeric(value)){
+            return sap.ui.core.ValueState.Error;
+        }
+        else{
+//        	this.setProperty("valueState",sap.ui.core.ValueState.Success);
+        }
 	}
 });

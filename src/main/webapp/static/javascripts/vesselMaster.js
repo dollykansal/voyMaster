@@ -2,7 +2,7 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
 	///final vessel details
     createContent: function(oController) {
         var oDialogVessel = new sap.ui.commons.Dialog({title: "Vessel Details", height: "90%", width:"90%"});
-
+//        var baseCtrl = sap.ui.getCore().byId("estViewId1").getController();
 ///////////////////////////////////Gear table///////////////////////////////////
     	var oGridForm = new sap.ui.layout.Grid({
     		hSpacing: 0,
@@ -139,7 +139,19 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	});
     	
     	
-//////////////////////////////////////////////////////////////////////////    	
+////////////////////////////////////////////////////////////////////////// 
+    	var data1 = {};
+    	var data3 = [];
+    	var data4 = [];
+    	var data5 = [];
+    	var data6 = [];
+    	var oModel = new sap.ui.model.json.JSONModel();
+    	oModel.setData({vesselData: data1});
+    	console.log(oModel);
+        sap.ui.getCore().setModel(oModel, "vesselDetails_1");
+        var oModel1 = new sap.ui.model.json.JSONModel();
+        oModel1.setData({vesselDataHC:data3,vesselDataHD:data4,vesselDataHaD:data5,vesselDataG:data6});
+        sap.ui.getCore().setModel(oModel1, "vesselDetails_2");
     	var oSimpleForm = new sap.ui.layout.form.SimpleForm(
     			//"sfVessel",
     			{
@@ -180,44 +192,100 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     				         new sap.ui.commons.TextField({value:"", editable: true}),
     				         new sap.ui.commons.Label({text:"Class"}),
     				         new sap.ui.commons.TextField({value:"", editable: true}),
-    				         new sap.ui.commons.Label({text:"L.O.A.", tooltip:"maximum length of the ship"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.Label({
+    				        	 text:"L.O.A.", 
+    				        	 tooltip:"maximum length of the ship"
+    				        	 }),
+    				         new sap.ui.commons.TextField({
+    				        	 editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
+    				         }),
     				         new sap.ui.commons.Label({text:"Beam", tooltip:"width at the widest point as measured at the ship's nominal waterline"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"Draft", tooltip:"distance between the highest waterline and the bottom of the ship"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"Depth",tooltip:"distance between the crown of the weather deck and the top of the keelson"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         
     				         new sap.ui.core.Title({text:"Tonnage Measurements"}),
     				         new sap.ui.commons.Label({text:"GT", tooltip:"Gross Tonnage"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"NT", tooltip:"Net Tonnage"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"GRT", tooltip:"Gross Register Tonnage"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"NRT", tooltip:"Net Register Tonnage"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"PC/UMS", tooltip:"Panama Canal/Universal Measurement System"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"SCNT", tooltip:"Suez Canal Net Tonnage"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
 
     				         new sap.ui.core.Title({text:"Weight Measurements"}),
     				         new sap.ui.commons.Label({text:"Lightship"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"DWT", tooltip:"Dead Weight Tonnage"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"TPCMI", tooltip:"Metric tonnes per centimetre immersion"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"TPI",tooltip:"Imperial tons per inch immersion"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"Constant", tooltip:"difference between a vessels design lightship and it's actual displacement when empty"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"Grain Capacity", tooltip:" measurement of capacity for cargo like grain, where the cargo flows to conform to the shape of the ship"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         new sap.ui.commons.Label({text:"Bale Capacity", tooltip:"measurement of capacity for cargo in bales, on pallets, etc., where the cargo does not conform to the shape of the ship"}),
-    				         new sap.ui.commons.TextField({value:"", editable: true}),
+    				         new sap.ui.commons.TextField({value:"", editable: true,
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }}),
     				         
     				         new sap.ui.core.Title({text:"Size Measurements"}),
     				         ////////////////////////////////////////////
@@ -235,7 +303,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: '/',
@@ -248,7 +319,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: 'HO/HA Type',
@@ -263,7 +337,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: '/',
@@ -291,7 +368,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: '/',
@@ -304,7 +384,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: 'MT/SQM',
@@ -325,7 +408,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: '/',
@@ -338,7 +424,10 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     			    				width: "60px",
     			    				layoutData : new sap.ui.layout.GridData({
     			    					span: "L2 M2 S12"
-    			    				})
+    			    				}),
+    				        	 change: function(){
+    				        		 this.setProperty("valueState",oController.checkForNumeric(this.getProperty("value")));
+    				        	 }
     			    			}),
     			    			new sap.ui.commons.Label({
     			    				text: 'MT/SQM',
@@ -350,25 +439,9 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     				         //add image in third column
     				         ]
     			});
+    	oSimpleForm.setModel(oModel);
     	oDialogVessel.addContent(oSimpleForm);
     	
-
-    	var oSimpleForm1 = new sap.ui.layout.form.SimpleForm(
-    			//"sfMeasure",
-    			{
-    				maxContainerCols: 3,
-    				minWidth : 1024,
-    				editable: true,
-    				layout: "ResponsiveGridLayout",
-    				labelSpanL:6,
-    				labelSpanM:6,
-    				columnsL:3,
-    				columnsM:3,
-    				content:[    				         
-    				         new sap.ui.core.Title({text:"Size Measurements"}),
-    				         oGridForm,
-    				         ]
-    			});
     	//oDialogVessel.addContent(oSimpleForm1);
     	
     	// hatches & holds
@@ -387,7 +460,8 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	oTableHatch.addColumn(window.helper.createColumn("no", "No.", "40px", "TF"));
     	oTableHatch.addColumn(window.helper.createColumn("length", "Length(m)", "40px", "TF"));
     	oTableHatch.addColumn(window.helper.createColumn("beam", "Beam(m)", "40px", "TF"));
-    	
+    	oTableHatch.setModel(oModel1);
+    	oTableHatch.bindRows("/vesselDataHC");
     	var oTableHold = window.helper.createTable({
     		title: "Hold Capacity",
     		visibleRowCount: 4,
@@ -402,7 +476,8 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	oTableHold.addColumn(window.helper.createColumn("no", "No.", "40px", "TF"));
     	oTableHold.addColumn(window.helper.createColumn("grain", "Grain(CBM)", "40px", "TF"));
     	oTableHold.addColumn(window.helper.createColumn("Bale", "Bale(CBM)", "40px", "TF"));
-    	
+    	oTableHold.setModel(oModel1);
+    	oTableHold.bindRows("/vesselDataHD");
     	var oTableHoldDim = window.helper.createTable({
     		title: "Hold Dimensions",
     		visibleRowCount: 4,
@@ -417,7 +492,8 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	oTableHoldDim.addColumn(window.helper.createColumn("no", "No.", "40px", "TF"));
     	oTableHoldDim.addColumn(window.helper.createColumn("length", "Length(m)", "40px", "TF"));
     	oTableHoldDim.addColumn(window.helper.createColumn("beam", "Beam(m)", "40px", "TF"));
-    	
+    	oTableHoldDim.setModel(oModel1);
+    	oTableHoldDim.bindRows("/vesselDataHaD");
     	var oTableGear = window.helper.createTable({
     		title: "Gears",
     		visibleRowCount: 4,
@@ -433,6 +509,8 @@ sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", {
     	oTableGear.addColumn(window.helper.createColumn("weightMT", "Weight(MT)", "40px", "TF"));
     	oTableGear.addColumn(window.helper.createColumn("weightEA", "Weight(EA)", "40px", "TF"));
     	oTableGear.addColumn(window.helper.createColumn("gearType", "Geartype", "40px", "TF"));
+    	oTableGear.setModel(oModel1);
+    	oTableGear.bindRows("/vesselDataG");
     	//Create a panel instance
     	var oPanelVessel = new sap.ui.commons.Panel({
     		width : "100%"

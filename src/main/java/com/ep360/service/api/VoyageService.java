@@ -12,8 +12,12 @@ public interface VoyageService {
 	public List<VesselMaster> getVesselMasterData();
 
 	public List<VoyHeader> getVoyageHeaderData();
+	
+	public VoyHeader getVoyageHeaderData(int voyNo);
 
-	public void saveData(Map<Object, Object> reqData);
+	public void saveData(Map<Object, Object> reqData, String username);
 	
 	public List<Demand> getDemands();
+
+	public void saveVesselData(Map<Object, Object> reqData, String username);
 }

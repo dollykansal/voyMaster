@@ -403,6 +403,7 @@ var arrival = new sap.ui.table.Column({
 	filterProperty: "arrival",
 	width: "90px"
 });
+oDatePicker1.bindProperty("value", "arrival");
 var departure = new sap.ui.table.Column({
 	label: new sap.ui.commons.Label({text: "Departure"}),
 	template: oDatePicker2,
@@ -410,6 +411,7 @@ var departure = new sap.ui.table.Column({
 	filterProperty: "departure",
 	width: "90px"
 });
+oDatePicker2.bindProperty("value", "departure");
 oPortTable.addColumn(arrival);
 oPortTable.addColumn(departure);
 oPortTable.setModel(oModel);

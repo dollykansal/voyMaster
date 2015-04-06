@@ -2,15 +2,18 @@ package com.ep360.data.models;
 // Generated Apr 2, 2015 11:37:37 PM by Hibernate Tools 4.3.1
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +25,10 @@ import javax.persistence.Table;
 )
 public class VesselMaster  implements java.io.Serializable {
 
-
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -177329981889367504L;
      private Integer vesselId;
      private String vesselName;
      private Float laycan;
@@ -49,6 +55,11 @@ public class VesselMaster  implements java.io.Serializable {
      private Float lsfoLaden;
      private Float lsfoIdle;
      private Float lsfoWork;
+     private VesselData vesselDatas;
+     private Set<VesselHoldDimension> vesselHoldDimensions = new HashSet<VesselHoldDimension>(0);
+     private Set<VesselHatchDimension> vesselHatchDimensions = new HashSet<VesselHatchDimension>(0);
+     private Set<VesselGear> vesselGears = new HashSet<VesselGear>(0);
+     private Set<VesselHoldCapacity> vesselHoldCapacities = new HashSet<VesselHoldCapacity>(0);
 
     public VesselMaster() {
     }
@@ -58,7 +69,7 @@ public class VesselMaster  implements java.io.Serializable {
         this.vesselName = vesselName;
         this.vesselType = vesselType;
     }
-    public VesselMaster(String vesselName, Float laycan, String vesselType, Float dwt, String draft, Float ballast, Float laden, String doDieselType, Float doSea, Float doIdle, Float doWork, String lsdoDieselType, Float lsdoSea, Float lsdoIdle, Float lsdoWork, Float foType, Float foBallast, Float foLaden, Float foIdle, Float foWork, Float lsfoType, Float lsfoBallast, Float lsfoLaden, Float lsfoIdle, Float lsfoWork, Set vesselDatas, Set vesselHoldDimensions, Set vesselHatchDimensions, Set vesselGears, Set vesselHoldCapacities) {
+    public VesselMaster(String vesselName, Float laycan, String vesselType, Float dwt, String draft, Float ballast, Float laden, String doDieselType, Float doSea, Float doIdle, Float doWork, String lsdoDieselType, Float lsdoSea, Float lsdoIdle, Float lsdoWork, Float foType, Float foBallast, Float foLaden, Float foIdle, Float foWork, Float lsfoType, Float lsfoBallast, Float lsfoLaden, Float lsfoIdle, Float lsfoWork, VesselData vesselDatas, Set vesselHoldDimensions, Set vesselHatchDimensions, Set vesselGears, Set vesselHoldCapacities) {
        this.vesselName = vesselName;
        this.laycan = laycan;
        this.vesselType = vesselType;
@@ -348,12 +359,50 @@ public class VesselMaster  implements java.io.Serializable {
         this.lsfoWork = lsfoWork;
     }
 
+@OneToOne(fetch=FetchType.EAGER, mappedBy="vesselMaster")
+    public VesselData getVesselDatas() {
+        return this.vesselDatas;
+    }
+    
+    public void setVesselDatas(VesselData vesselDatas) {
+        this.vesselDatas = vesselDatas;
+    }
 
+@OneToMany(fetch=FetchType.EAGER, mappedBy="vesselMaster")
+    public Set<VesselHoldDimension> getVesselHoldDimensions() {
+        return this.vesselHoldDimensions;
+    }
+    
+    public void setVesselHoldDimensions(Set<VesselHoldDimension> vesselHoldDimensions) {
+        this.vesselHoldDimensions = vesselHoldDimensions;
+    }
 
+@OneToMany(fetch=FetchType.EAGER, mappedBy="vesselMaster")
+    public Set<VesselHatchDimension> getVesselHatchDimensions() {
+        return this.vesselHatchDimensions;
+    }
+    
+    public void setVesselHatchDimensions(Set<VesselHatchDimension> vesselHatchDimensions) {
+        this.vesselHatchDimensions = vesselHatchDimensions;
+    }
 
+@OneToMany(fetch=FetchType.EAGER, mappedBy="vesselMaster")
+    public Set<VesselGear> getVesselGears() {
+        return this.vesselGears;
+    }
+    
+    public void setVesselGears(Set<VesselGear> vesselGears) {
+        this.vesselGears = vesselGears;
+    }
 
-
-
+@OneToMany(fetch=FetchType.EAGER, mappedBy="vesselMaster")
+    public Set<VesselHoldCapacity> getVesselHoldCapacities() {
+        return this.vesselHoldCapacities;
+    }
+    
+    public void setVesselHoldCapacities(Set<VesselHoldCapacity> vesselHoldCapacities) {
+        this.vesselHoldCapacities = vesselHoldCapacities;
+    }
 }
 
 

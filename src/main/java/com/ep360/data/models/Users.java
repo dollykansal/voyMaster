@@ -22,7 +22,11 @@ import javax.persistence.TemporalType;
 public class Users  implements java.io.Serializable {
 
 
-     private UsersId id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4712626895974111688L;
+	private UsersId id;
      private String fullName;
      private Date lastLoginTime;
      private Date lastLogoutTime;

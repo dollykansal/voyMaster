@@ -1,8 +1,9 @@
  var Demand = function(){
 	//Create the Accordion control
 	var oAccordion = new sap.ui.commons.Accordion("accordionA"); 
-	for(var x=0;x<window.demands.length;x++){
-		var demand = window.demands[x];
+	var dbData = sap.ui.getCore().getModel("dbData").getData();
+	for(var x=0;x<dbData['demands'].length;x++){
+		var demand = dbData['demands'][x];
 		var oSection1 = new sap.ui.commons.AccordionSection("Demand"+demand['demandId']);		
 		oSection1.setTitle(demand['account']+","+demand['cargoName']);		
 		oSection1.setTooltip(demand['account']);
