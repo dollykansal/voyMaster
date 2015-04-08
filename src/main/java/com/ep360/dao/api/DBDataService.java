@@ -37,4 +37,6 @@ public interface DBDataService {
 	public List<VoyageVessel> getEstimates();
 
 	public VoyHeader getVoyageHeaderData(int voyNo);
+	
+	public VesselMaster getVesselMaster(long id);
 }

@@ -36,6 +36,16 @@ public class DBDataServiceImpl implements DBDataService{
 	}
 
 	@Override
+	public VesselMaster getVesselMaster(long id) {
+		List<VesselMaster> vessels = hibernateTemplate
+				.find("from VesselMaster where vesselId='" + id + "'");
+		if (vessels != null && vessels.size() > 0) {
+			return vessels.get(0);
+		}
+		return null;
+	}
+
+	@Override
 	public VoyHeader getVoyageHeaderData(int voyNo) {
 		List<VoyHeader> headers = hibernateTemplate.find("from VoyHeader where voyNo='"
 				+ voyNo + "'");

@@ -25,7 +25,6 @@ var estDash = function(){
 						type:"GET",
 						contentType: 'application/json',
 						success:function(data){
-							console.log(data);
 							sap.ui.getCore().getModel("vessel").setData(data["vesselData"]);
 							sap.ui.getCore().getModel("cargo").setData({modelData: data["cargoData"]});
 							sap.ui.getCore().getModel("port").setData({modelData: data["portData"]});
