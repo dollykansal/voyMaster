@@ -12,14 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.ep360.controller.data.VesselData1;
-import com.ep360.controller.data.VesselData2;
-import com.ep360.controller.data.VesselData3;
-import com.ep360.controller.data.VesselData4;
 import com.ep360.dao.api.DBDataService;
 import com.ep360.data.models.Cargo;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.PortRotation;
+import com.ep360.data.models.VesselData;
+import com.ep360.data.models.VesselGear;
+import com.ep360.data.models.VesselHatchDimension;
+import com.ep360.data.models.VesselHoldCapacity;
+import com.ep360.data.models.VesselHoldDimension;
 import com.ep360.data.models.VesselMaster;
 import com.ep360.data.models.VoyHeader;
 import com.ep360.data.models.VoyageVessel;
@@ -58,9 +59,59 @@ public class VoyageServiceImpl implements VoyageService {
 
 	@Override
 	public void saveVesselData(Map<Object, Object> reqData, String username) {
-		//TODO:Save logic
-		System.out.println("Hold Plz");
+		if(reqData.get("vesselData")!=null && reqData.get("vesselDataG")!=null && reqData.get("vesselDataHC")!=null && reqData.get("vesselDataHD")!=null && reqData.get("vesselDataHaD")!=null){
+			List<Object> entities = new ArrayList<Object>();
+			VesselMaster vesselMaster = dataService.getVesselMaster(Long.parseLong((String)reqData.get("vesselMasterId")));
+			entities.add(saveVesselDataModel((Map<Object,Object>)reqData.get("vesselData"),vesselMaster));
+			entities.addAll(saveVesselHoldDimesions((List<Map<Object,Object>>)reqData.get("vesselDataHD"),vesselMaster));
+			entities.addAll(saveVesselHatchDimesions((List<Map<Object,Object>>)reqData.get("vesselDataHaD"),vesselMaster));
+			entities.addAll(saveVesselHoldCapcities((List<Map<Object,Object>>)reqData.get("vesselDataHC"),vesselMaster));
+			entities.addAll(saveVesselGears((List<Map<Object,Object>>)reqData.get("vesselDataG"),vesselMaster));
+			dataService.saveAllData(entities);
+		}
 		
+	}
+	
+	private VesselData saveVesselDataModel(Map<Object, Object> reqData,
+			VesselMaster vesselMaster) {
+		VesselData vesselData = new VesselData();
+		if(reqData.get("vesselDataId")!=null){
+			vesselData.setVesselDataId((Integer)reqData.get("vesselDataId"));
+		}
+		vesselData.setBaleCapacity(getValue(reqData.get("baleCapacity")));
+		vesselData.setBeam(getValue(reqData.get("beam")));
+		vesselData.setBuilt(reqData.get("built")!=null?(String)reqData.get("built"):null);
+		vesselData.setCallSign(reqData.get("callSign")!=null?(String)reqData.get("callSign"):null);
+		vesselData.setClass_(reqData.get("class_")!=null?(String)reqData.get("class_"):null);
+		vesselData.setConstant(getValue(reqData.get("constant")));
+		vesselData.setDepth(getValue(reqData.get("depth")));
+		vesselData.setDraft(getValue(reqData.get("draft")));
+		vesselData.setDwt(getValue(reqData.get("dwt	")));
+		vesselData.setFlag(reqData.get("flag")!=null?(String)reqData.get("flag"):null);
+		vesselData.setGrainCapacity(getValue(reqData.get("grainCapacity")));
+		vesselData.setGrt(getValue(reqData.get("grt")));
+		vesselData.setGt(getValue(reqData.get("gt")));
+//		vesselData.setHatchCoverStrength(hatchCoverStrength);
+//		vesselData.setHoHa(hoHa);
+//		vesselData.setHoHaType(hoHaType);
+		vesselData.setHullNo(reqData.get("hull")!=null?(String)reqData.get("hull"):null);
+		vesselData.setImoNo(reqData.get("imo")!=null?(String)reqData.get("imo"):null);
+		vesselData.setLightShip(getValue(reqData.get("lightShip")));
+		vesselData.setLoa(getValue(reqData.get("loa")));
+		vesselData.setMv(reqData.get("mv")!=null?(String)reqData.get("mv"):null);
+		vesselData.setNrt(getValue(reqData.get("nrt")));
+		vesselData.setNt(getValue(reqData.get("nt")));
+		vesselData.setOwner(reqData.get("owner")!=null?(String)reqData.get("owner"):null);
+		vesselData.setPcUms(getValue(reqData.get("pcUms")));
+		vesselData.setScnt(getValue(reqData.get("scnt")));
+//		vesselData.setTankTopStrength(tankTopStrength);
+		vesselData.setTpcmi(getValue(reqData.get("tpcmi")));
+		vesselData.setTpi(getValue(reqData.get("tpi")));
+		vesselData.setVesselCode(reqData.get("vesselCode")!=null?(String)reqData.get("vesselCode"):null);
+		vesselData.setVesselKind(reqData.get("vesselKind")!=null?(String)reqData.get("vesselKind"):null);
+		vesselData.setVesselMaster(vesselMaster);
+		vesselData.setVesselType(reqData.get("vesselType")!=null?(String)reqData.get("vesselType"):null);
+		return vesselData;
 	}
 
 	@Override
@@ -77,6 +128,79 @@ public class VoyageServiceImpl implements VoyageService {
 		}
 	}
 
+	private List<VesselGear> saveVesselGears(List<Map<Object, Object>> gearList, VesselMaster vesselMaster) {
+		List<VesselGear> gearRespList = new ArrayList<VesselGear>();
+		if(gearList!=null&& gearList.size()>0){
+			for(Map<Object, Object> reqData:gearList){
+				VesselGear gear = new VesselGear();
+				if(reqData.get("vesselGearId")!=null){
+					gear.setVesselGearId((Integer)reqData.get("vesselGearId"));
+				}
+				gear.setGear(reqData.get("gearName")!=null?(String)reqData.get("gearName"):null);
+				gear.setGearType(reqData.get("gearType")!=null?(String)reqData.get("gearType"):null);
+				gear.setVesselMaster(vesselMaster);
+				gear.setWeightEa(getValue(reqData.get("weightEa")));
+				gear.setWeightMt(getValue(reqData.get("weightMt")));
+				gearRespList.add(gear);
+			}
+		}
+		return gearRespList;
+	}
+
+	private List<VesselHoldCapacity> saveVesselHoldCapcities(
+			List<Map<Object, Object>> capcityList,VesselMaster vesselMaster) {
+		List<VesselHoldCapacity> respList = new ArrayList<VesselHoldCapacity>();
+		if(capcityList!=null&& capcityList.size()>0){
+			for(Map<Object, Object> reqData:capcityList){
+				VesselHoldCapacity vhc = new VesselHoldCapacity();
+				if(reqData.get("vesselHoldCapacityId")!=null){
+					vhc.setVesselHoldCapacityId((Integer)reqData.get("vesselHoldCapacityId"));
+				}
+				vhc.setBale(getValue(reqData.get("bale")));
+				vhc.setGrain(getValue(reqData.get("grain")));
+				vhc.setVesselMaster(vesselMaster);
+				respList.add(vhc);
+			}
+		}
+		return respList;
+	}
+
+	private List<VesselHoldDimension> saveVesselHoldDimesions(
+			List<Map<Object, Object>> dimensionList,VesselMaster vesselMaster) {
+		List<VesselHoldDimension> respList = new ArrayList<VesselHoldDimension>();
+		if(dimensionList!=null&& dimensionList.size()>0){
+			for(Map<Object, Object> reqData:dimensionList){
+				VesselHoldDimension vhc = new VesselHoldDimension();
+				if(reqData.get("vesselHoldDimId")!=null){
+					vhc.setVesselHoldDimId((Integer)reqData.get("vesselHoldDimId"));
+				}
+				vhc.setBeam(getValue(reqData.get("beam")));
+				vhc.setLength(getValue(reqData.get("length")));
+				vhc.setVesselMaster(vesselMaster);
+				respList.add(vhc);
+			}
+		}
+		return respList;
+	}
+
+	private List<VesselHatchDimension> saveVesselHatchDimesions(
+			List<Map<Object, Object>> hatchDimList,VesselMaster vesselMaster) {
+		List<VesselHatchDimension> respList = new ArrayList<VesselHatchDimension>();
+		if(hatchDimList!=null&& hatchDimList.size()>0){
+			for(Map<Object, Object> reqData:hatchDimList){
+				VesselHatchDimension vhc = new VesselHatchDimension();
+				if(reqData.get("vesselHatchDimId")!=null){
+					vhc.setVesselHatchDimId((Integer)reqData.get("vesselHatchDimId"));
+				}
+				vhc.setBeam(getValue(reqData.get("beam")));
+				vhc.setLength(getValue(reqData.get("length")));
+				vhc.setVesselMaster(vesselMaster);
+				respList.add(vhc);
+			}
+		}
+		return respList;
+	}
+
 	private Object saveVessel(Map<Object, Object> reqData, VoyHeader voyHeader) {
 		VoyageVessel voyageVessel = new VoyageVessel();
 		voyageVessel.setVoyHeader(voyHeader);
@@ -90,20 +214,20 @@ public class VoyageServiceImpl implements VoyageService {
 		Map<Object, Object> data2 = data2List.iterator().next();
 		List<Map<Object, Object>> data3List = (List<Map<Object, Object>>)reqData.get("data3");
 		List<Map<Object, Object>> data4List = (List<Map<Object, Object>>)reqData.get("data4");
-		voyageVessel.setVesselName((String)data1.get("mv"));
-		voyageVessel.setVesselType((String)data1.get("vesselType"));
+		voyageVessel.setVesselName(reqData.get("mv")!=null?(String)reqData.get("mv"):null);
+		voyageVessel.setVesselType(reqData.get("vesselType")!=null?(String)reqData.get("vesselType"):null);
 		voyageVessel.setDwt(getValue(data1.get("dwt")));
-		voyageVessel.setDraft((String)data1.get("draft"));
+		voyageVessel.setDraft(reqData.get("draft")!=null?(String)reqData.get("draft"):null);
 		voyageVessel.setBallast(getValue(data2.get("ballast")));
 		voyageVessel.setLaden(getValue(data2.get("laden")));
 		for(Map<Object, Object> data:data3List){
 			if(((String)data.get("vesselName")).equalsIgnoreCase("DO")){
-				voyageVessel.setDoDieselType((String)data.get("dieselType"));
+				voyageVessel.setDoDieselType(reqData.get("dieselType")!=null?(String)reqData.get("dieselType"):null);
 				voyageVessel.setDoSea(getValue(data.get("sea")));
 				voyageVessel.setDoIdle(getValue(data.get("idle")));
 				voyageVessel.setDoWork(getValue(data.get("work")));
 			}else{
-				voyageVessel.setLsdoDieselType((String)data.get("dieselType"));
+				voyageVessel.setLsdoDieselType(reqData.get("dieselType")!=null?(String)reqData.get("dieselType"):null);
 				voyageVessel.setLsdoSea(getValue(data.get("sea")));
 				voyageVessel.setLsdoIdle(getValue(data.get("idle")));
 				voyageVessel.setLsdoWork(getValue(data.get("work")));

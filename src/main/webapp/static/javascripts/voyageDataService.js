@@ -22,6 +22,7 @@ var VoyageDataService = function(){
 		data['vesselDataHD'] = sap.ui.getCore().getModel("vesselDetails_2").getData()["vesselDataHD"];
 		data['vesselDataHaD'] = sap.ui.getCore().getModel("vesselDetails_2").getData()["vesselDataHaD"];
 		data['vesselDataG'] = sap.ui.getCore().getModel("vesselDetails_2").getData()["vesselDataG"];
+		data['vesselMasterId'] = sap.ui.getCore().getModel("editVess").getData();
 		$.ajax({
 			url:"http://localhost:8080/voyage/saveVesselData",
 			type:"POST",
