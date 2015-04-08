@@ -34,5 +34,18 @@ sap.ui.controller("static.voyageest.Contract", {
 //	onExit: function() {
 //
 //	}
-
+	checkIfRowExist: function(products, cargoRowIndex, cType){
+		var row = {};
+		row["result"] = false;
+		if(products!=undefined && products.length>0){
+			for(var x=0;x<products.length;x++){
+				if(products[x].cargoRow==cargoRowIndex && products[x].cType == cType){
+					row["index"] = x;
+					row["product"] = products[x];
+					row["result"] = true;
+				}
+			}
+		}
+		return row;
+	},
 });

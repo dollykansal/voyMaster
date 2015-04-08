@@ -52,6 +52,7 @@
 <script src="static/javascripts/vesselDashboard.js"></script>
 <script src="static/javascripts/summary.js"></script>
 <script src="static/javascripts/contract.js"></script>
+<script src="static/javascripts/contractTC.js"></script>
 <script src="static/javascripts/contractDash.js"></script>
 <!-- <script type="text/javascript"
 	src="static/vendor/fusioncharts-suite-xt/js/fusioncharts.js"></script>
@@ -117,7 +118,8 @@
 					            	  text: "Contract",
 					            	  subItems:[
 					             				new sap.ui.ux3.NavigationItem({key:"wi_cont_overview",text:"Overview"}),
-					             				new sap.ui.ux3.NavigationItem({key:"wi_cont_create",text:"Contract"})
+					             				new sap.ui.ux3.NavigationItem({key:"wi_cont_create",text:"COA Contract"}),
+					             				new sap.ui.ux3.NavigationItem({key:"wi_cont_tc",text:"TC Contract"}),
 					              				]
 					              })
 					              ],
@@ -200,6 +202,8 @@
 							mContent[id] = new contractDash();
 						}else if (id == "wi_cont_create") {
 							mContent[id] = sap.ui.getCore().byId("contractViewId");
+						}else if (id == "wi_cont_tc") {
+							mContent[id] = new contractTC();
 						}
 					}else{
 					}
