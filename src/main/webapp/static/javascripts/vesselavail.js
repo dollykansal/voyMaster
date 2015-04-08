@@ -13,9 +13,12 @@ var aData = dbData['vessels'];
 //Create an instance of the table control
 var oTableVess = window.helper.createTable({title:"Vessel Availability"});
 var oControl = new sap.ui.commons.Link({
-	press: function() {oController.onClickVessel();}
+	press: function() {
+		oController.onClickVessel(this);
+	}
 });
 oControl.bindProperty("text", "vesselName");
+oControl.bindProperty("helpId", "vesselId");
 oTableVess.addColumn(new sap.ui.table.Column({
 	label: new sap.ui.commons.Label({text: "Vessel Name"}), 
 	template: oControl, //sortProperty: "id.vesselName", 

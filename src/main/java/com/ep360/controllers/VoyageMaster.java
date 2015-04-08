@@ -38,11 +38,11 @@ public class VoyageMaster {
 		return vesselFacade.getVoyageHeaderData();
 	}
 	
-	@RequestMapping(value = "/vesselMaster", method = RequestMethod.GET)
-	@ResponseBody
-	public List<VesselMaster> getVoyageMasterData(){
-		return vesselFacade.getVoyageMasterData();
-	}
+//	@RequestMapping(value = "/vesselMaster", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<VesselMaster> getVoyageMasterData(){
+//		return vesselFacade.getVoyageMasterData();
+//	}
 	
 	@RequestMapping(value = "/vesselMaster/{id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -79,7 +79,7 @@ public class VoyageMaster {
 		Map<String,String> response = new HashMap<String, String>();
 		response.put("result","success");
 		if(reqData!=null){
-			vesselFacade.saveData(reqData, auth.getUsername());
+			vesselFacade.saveVesselData(reqData, auth.getUsername());
 		}
 		return response;
 	}

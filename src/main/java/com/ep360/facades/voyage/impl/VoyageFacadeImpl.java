@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ep360.controller.data.EstimateData;
+import com.ep360.controller.data.VesselMasterData;
 import com.ep360.controller.data.VoyageVesselData;
-import com.ep360.converters.EstimateConverter;
-import com.ep360.converters.VoyageVesselConverter;
+import com.ep360.converters.estimate.EstimateConverter;
+import com.ep360.converters.vessel.VesselMasterConverter;
+import com.ep360.converters.voyage.VoyageVesselConverter;
 import com.ep360.data.models.Demand;
 import com.ep360.data.models.VesselMaster;
 import com.ep360.data.models.VoyHeader;
@@ -29,6 +31,9 @@ public class VoyageFacadeImpl implements VoyageFacade{
 	@Autowired
 	private EstimateConverter estimateConverter;
 	
+	@Autowired
+	private VesselMasterConverter vesselMasterConverter;
+	
 	public List<VoyageVesselData> getVoyageVesselList(){
 		List<VoyHeader> voyageVesselList = voyageService.getVoyageHeaderData();	
 		List<VoyageVesselData> dataList = new ArrayList<VoyageVesselData>();
@@ -46,8 +51,15 @@ public class VoyageFacadeImpl implements VoyageFacade{
 	}
 
 	@Override
-	public List<VesselMaster> getVoyageMasterData() {
-		return voyageService.getVesselMasterData();
+	public List<VesselMasterData> getVoyageMasterData() {
+		List<VesselMaster> vesselMasterList = voyageService.getVesselMasterData();
+		List<VesselMasterData> dataList = new ArrayList<VesselMasterData>();
+		if(vesselMasterList!=null && vesselMasterList.size()>0){
+			for(VesselMaster vesselMaster:vesselMasterList){
+				dataList.add(vesselMasterConverter.convert(vesselMaster));
+			}
+		}
+		return dataList;
 	}
 
 	@Override

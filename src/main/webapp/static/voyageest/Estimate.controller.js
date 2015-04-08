@@ -54,7 +54,10 @@ sap.ui.controller("static/voyageest.Estimate", {
 	getSelectedVessel: function() {
 		//return vesselName;
 	},
-	onClickVessel: function(){
+	onClickVessel: function(id){
+		var oModel = new sap.ui.model.json.JSONModel();
+		oModel.setData(id.getProperty("helpId"));
+		sap.ui.getCore().setModel(oModel,"editVess");
 		var oDialogVessel = sap.ui.jsfragment("vesselMaster.fragments.JSFragmentDialog", this);  
 		oDialogVessel.open();
 	},
