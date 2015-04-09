@@ -1,16 +1,7 @@
 var contractTC = function(){
 
 //////////////////////////////////////Form : General Information for Voyage Contracts///////////////////////////////////////
-	var oComboBox = new sap.ui.commons.ComboBox({
-		tooltip: "Agent Nomination",
-		items: [new sap.ui.core.ListItem({text: "Nominated by Charterer", key: "1"}),
-		        new sap.ui.core.ListItem({text: "Nominated by Owner", key: "2"}),],
-	});
-	var oComboBox1 = new sap.ui.commons.ComboBox({
-		tooltip: "Agent Nomination",
-		items: [new sap.ui.core.ListItem({text: "Nominated by Charterer", key: "1"}),
-		        new sap.ui.core.ListItem({text: "Nominated by Owner", key: "2"}),],
-	});
+
 	var oCbTxType = new sap.ui.commons.ComboBox({
 		tooltip: "Transaction Type",
 		items: [new sap.ui.core.ListItem({text: "Buy", key: "1"}),
@@ -26,7 +17,7 @@ var contractTC = function(){
 	var oCbPayOn = new sap.ui.commons.ComboBox({
 		tooltip: "Pay On",
 		items: [new sap.ui.core.ListItem({text: "Bill of Lading", key: "1"}),
-		        ],
+		        new sap.ui.core.ListItem({text: "Outturn", key: "2"})],
 	});
 	var oCbStatus = new sap.ui.commons.ComboBox({
 		tooltip: "Status",
@@ -39,6 +30,26 @@ var contractTC = function(){
 		press: function() {
 			//oDialogLaytime.open();
 		}
+	});
+	var oCbTCType = new sap.ui.commons.ComboBox({
+		tooltip: "TC Type",
+		items: [new sap.ui.core.ListItem({text: "Long Term", key: "L"}),
+		        new sap.ui.core.ListItem({text: "Short Term", key: "S"}),
+		        new sap.ui.core.ListItem({text: "Medium Term", key: "S"}),
+		        new sap.ui.core.ListItem({text: "Trip", key: "T"}),
+		        ],
+	});
+	var oCbCPForm = new sap.ui.commons.ComboBox({
+		tooltip: "CP Form",
+		items: [new sap.ui.core.ListItem({text: "Shell Time", key: "1"}),
+		        new sap.ui.core.ListItem({text: "New form", key: "2"}),
+		        ],
+	});
+	var oCbPayTerms = new sap.ui.commons.ComboBox({
+		tooltip: "Payment Terms",
+		items: [new sap.ui.core.ListItem({text: "Freight Payable immediately due net", key: "1"}),
+		        new sap.ui.core.ListItem({text: "Freight 90% due imm,10% due 30 days", key: "2"}),
+		        ],
 	});
 	var oSimpleForm = new sap.ui.layout.form.SimpleForm(
 			"sfContractTC",
@@ -53,63 +64,67 @@ var contractTC = function(){
 				columnsM:4,
 				content:[
 				         new sap.ui.core.Title({text:"General"}),
-				         new sap.ui.commons.Label({text:"Contract No."}),
+/*				         new sap.ui.commons.Label({text:"Contract No."}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
 				         new sap.ui.commons.Label({text:"Document Type", labelFor: oCbDocType}),
 				         oCbDocType,
 				         new sap.ui.commons.Label({text:"Transaction Type", labelFor: oCbTxType}),
-				         oCbTxType,
-				         new sap.ui.commons.Label({text:"Description"}),
+				         oCbTxType,*/
+				         new sap.ui.commons.Label({text:"Company", tooltip:"legal entity name entering into TC contract (i.e. signs the contract)"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Charterer"}),
+				         new sap.ui.commons.Label({text:"Charterer(BP)", tooltip:"business partner representing the Company"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"On Behalf of"}),
+				         new sap.ui.commons.Label({text:"TC Benchmark", tooltip:"index against which voyages performed under a TC will be measured (or benchmarked)"}),
+				         new sap.ui.commons.TextField({value:"", editable: true}),
+				         new sap.ui.commons.Label({text:"TC Benchmark %", tooltip:"TC benchmark percentage"}),
+				         new sap.ui.commons.TextField({value:"", editable: true}),
+				         new sap.ui.commons.Label({text:"Owner", tooltip:"Name of the vessel ownwer"}),
+				         new sap.ui.commons.TextField({value:"", editable: true}),
+				         new sap.ui.commons.Label({text:"Guarantor", tooltip:"business partner/s that sets a guarantee for the TC"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
 				         new sap.ui.commons.Label({text:"Vessel"}),
 				         oLinkVessel,
 				         //new sap.ui.commons.TextField({value:"Select Vessel", template: oLinkVessel}),
 
 				         new sap.ui.core.Title({text:"Currency"}),
-				         new sap.ui.commons.Label({text:"Hire Currency"}),
+				         new sap.ui.commons.Label({text:"Hire Currency",tooltip:"currency to be used for the TC"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Exchange Rate"}),
+				         new sap.ui.commons.Label({text:"Address Comm.",tooltip:"address commission"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:""}),
-				         new sap.ui.commons.TextView({text:""}),
+				         new sap.ui.commons.Label({text:"Ballast Bonus", tooltip:"agreed ballast bonus lumpsum (if applicable)"}),
+				         new sap.ui.commons.TextField({value:"", editable: true}),
+				         new sap.ui.commons.Label({text:"ILOHC",tooltip:"agreed ILOHC lumpsum (if applicable) under ILOHC (In Lieu of Holds Cleaning)"}),
+				         new sap.ui.commons.TextField({value:"", editable: true}),
+				         new sap.ui.commons.Label({text:"Zero Profit"}),
+				         new sap.ui.commons.CheckBox({value:""}),
 				         new sap.ui.commons.Label({text:"Status"}),
 				         oCbStatus,
 
 				         new sap.ui.core.Title({text:"Payment Terms"}),
-				         new sap.ui.commons.Label({text:"Zero Profit"}),
-				         new sap.ui.commons.CheckBox({value:""}),
+
+				         new sap.ui.commons.Label({text:"TC Type", labelFor: oCbTCType}),
+				         oCbTCType,
 				         new sap.ui.commons.Label({text:"CP Date"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"CP Form"}),
+				         new sap.ui.commons.Label({text:"CP Form", labelFor: oCbCPForm}),
+				         oCbCPForm,
+				         new sap.ui.commons.Label({text:"Charterer", tooltip:"person responsible for the TC contract in the Chartering department"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Trade"}),
-				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Trader"}),
-				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Payment Terms"}),
-				         new sap.ui.commons.TextField({value:"", editable: true}),			
+				         new sap.ui.commons.Label({text:"Pay On", labelFor: oCbPayOn}),
+				         oCbPayOn,
+				         new sap.ui.commons.Label({text:"Payment Terms", labelFor: oCbPayTerms}),
+				         oCbPayTerms,
 				         new sap.ui.commons.Label({text:"Partial Own. %"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),	
 
-				         new sap.ui.core.Title({text:"Laycan"}),
+				         new sap.ui.core.Title({text:"Comments"}),
 				         new sap.ui.commons.Label({text:"Laycan From"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
 				         new sap.ui.commons.Label({text:"Laycan To"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Nominate Laycan"}),
+				         new sap.ui.commons.Label({text:"Comments"}),
 				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Preliminary Notice"}),
-				         new sap.ui.commons.TextField({value:"", editable: true}),
-				         new sap.ui.commons.Label({text:"Agent Nomination,Load", labelFor: oComboBox}),
-				         oComboBox,
-				         new sap.ui.commons.Label({text:"Agent Nomination,Discharge", labelFor: oComboBox1}),
-				         oComboBox1,
-				         new sap.ui.commons.Label({text:"Pay On", labelFor: oCbPayOn}),
-				         oCbPayOn
+				         
 				         ]
 			});
 ////////////////////////////////////////////////////////delivery redelivery terms/////////////////////////
@@ -407,84 +422,134 @@ var contractTC = function(){
 				         oGridRedeliveryBunk,
 				         ]
 			});
-	//////////////////////////////////////////// Table for Laytime//////////////////////////////////////////////////
-	var oTableLaycan = window.helper.createTable({
-		//title: "Laytime",
+	//////////////////////////////////////////////////////table for Notices////////////////////////////////////////////////////
+	var oTableDelNotice = window.helper.createTable({
+		title: "Delivery Notices",
 		visibleRowCount: 2,
-		firstVisibleRow: 2
+		firstVisibleRow: 2,
+		toolbar: new sap.ui.commons.Toolbar({
+			items: [ 
+			        new sap.ui.commons.Button({text: "Add",style: sap.ui.commons.ButtonStyle.Accept, press: function(){} }),
+			        new sap.ui.commons.Button({text: "Delete",style: sap.ui.commons.ButtonStyle.Reject,  press: function(){} })
+			        ]}),
 	});
-	oTableLaycan.addColumn(window.helper.createColumn("schType", "Schedule Type", "40px", "TV"));
-	oTableLaycan.addColumn(window.helper.createColumn("actArrival", "Actual Arrival", "40px", "TV"));
-	oTableLaycan.addColumn(window.helper.createColumn("laycanFrom", "Laycan From", "40px", "TF"));
-	oTableLaycan.addColumn(window.helper.createColumn("laycanTo", "Laycan To", "40px", "TF"));
+	oTableDelNotice.addColumn(window.helper.createColumn("noticeNo", "Notice No.", "40px", "TF")); //
+	oTableDelNotice.addColumn(window.helper.createColumn("days", "Days", "40px", "TF")); // number of days before an owner must notify the charterer of a vessel's expected arrival time to agreed delivery point.
+	
+	var oTableReNotice = window.helper.createTable({
+		title: "Redelivery Notices",
+		visibleRowCount: 2,
+		firstVisibleRow: 2,
+		toolbar: new sap.ui.commons.Toolbar({
+			items: [ 
+			        new sap.ui.commons.Button({text: "Add",style: sap.ui.commons.ButtonStyle.Accept, press: function(){} }),
+			        new sap.ui.commons.Button({text: "Delete",style: sap.ui.commons.ButtonStyle.Reject,  press: function(){} })
+			        ]}),
+	});
+	oTableReNotice.addColumn(window.helper.createColumn("noticeNo", "Notice No.", "40px", "TF")); //
+	oTableReNotice.addColumn(window.helper.createColumn("days", "Days", "40px", "TF")); // number of days before an owner must notify the charterer of a vessel's expected arrival time to agreed redelivery point.
+	//////////////////////////////////////////// Table for Laytime//////////////////////////////////////////////////
+	var oTablePeriod = window.helper.createTable({
+		title: "Duration",
+		visibleRowCount: 2,
+		firstVisibleRow: 2,
+		toolbar: new sap.ui.commons.Toolbar({
+			items: [ 
+			        new sap.ui.commons.Button({text: "Add",style: sap.ui.commons.ButtonStyle.Accept, press: function(){} }),
+			        new sap.ui.commons.Button({text: "Delete",style: sap.ui.commons.ButtonStyle.Reject,  press: function(){} })
+			        ]}),
+	});
+	oTablePeriod.addColumn(window.helper.createColumn("periodNo", "Period No.", "40px", "TF")); //period item ID 1, 2, 3,
+	oTablePeriod.addColumn(window.helper.createColumn("minDuration", "Min Duration", "40px", "TF")); // minimum duration e.g. 12(min) months to 14( max) months
+	oTablePeriod.addColumn(window.helper.createColumn("maxDuration", "Max Duration", "40px", "TF")); // maximum Duration
+	oTablePeriod.addColumn(window.helper.createColumn("fixedDuration", "Fixed Duration", "40px", "TF")); // fixed Duration (+/- tolerance)
+	oTablePeriod.addColumn(window.helper.createColumn("durTimeUnit", "Duration Time Unit", "40px", "TF"));
+	//todo:check either enter min max or fixed along with tolerance
+	oTablePeriod.addColumn(window.helper.createColumn("tolerancePlus", "Tolerance(+) Days", "40px", "TF"));
+	oTablePeriod.addColumn(window.helper.createColumn("toleranceMinus", "Tolerance(-) Days", "40px", "TF"));
+	oTablePeriod.addColumn(window.helper.createColumn("option", "Option", "20px", "CH")); //indicate if the duration period is optional.
+	//@todo, put a check:CANNOT be used for the initial duration period or if the TC contract only consists of one duration period. Should then be left blank.
+	//following fields only if option is checked
+	oTablePeriod.addColumn(window.helper.createColumn("optionDecNotice", "Option Dec Notice", "40px", "TF"));
+	oTablePeriod.addColumn(window.helper.createColumn("optionStartPeriod", "Option Start Period", "40px", "TF")); //when should optional period start e.g. 22 months after vessel delivery
+	oTablePeriod.addColumn(window.helper.createColumn("optionFixedEndDate", "Option Fixed End date", "40px", "TF"));//if there is any fixed end date for optional period
+	oTablePeriod.addColumn(window.helper.createColumn("optionStatus", "Option Status", "40px", "TF"));//duration period's option status (Not declared/Forfeited/Declared)
+	oTablePeriod.addColumn(window.helper.createColumn("optionActNoticeDate", "Option Actual Notice Date", "40px", "TF"));//actual date notice was given under Option Decl. Date
 
-	oTableLaycan.addColumn(window.helper.createColumn("fixed", "Fixed", "40px", "CH"));
-	oTableLaycan.addColumn(window.helper.createColumn("duration", "Duration", "40px", "TV"));
-	oTableLaycan.addColumn(window.helper.createColumn("durationUom", "Duration UOM", "40px", "TV"));
-	var aData = [
-	             {schType: "Delivery Cost"},
-	             {schType: "Redelivery Cost"}
-	             ];
+	var aData = [];
 	var oModel = new sap.ui.model.json.JSONModel();
 	oModel.setData({modelData: aData});
-	oTableLaycan.setModel(oModel);
-	oTableLaycan.bindRows("/modelData");
-	sap.ui.getCore().setModel(oModel, "laytimeContract"); 
-	var oPanelLaytime = new sap.ui.commons.Panel({
+	oTablePeriod.setModel(oModel);
+	oTablePeriod.bindRows("/modelData");
+	sap.ui.getCore().setModel(oModel, "periodTC"); 
+	
+	var oTableRates = window.helper.createTable({
+		title: "Period Rates",
+		visibleRowCount: 2,
+		firstVisibleRow: 2,
+		toolbar: new sap.ui.commons.Toolbar({
+			items: [ 
+			        new sap.ui.commons.Button({text: "Add",style: sap.ui.commons.ButtonStyle.Accept, press: function(){} }),
+			        new sap.ui.commons.Button({text: "Delete",style: sap.ui.commons.ButtonStyle.Reject,  press: function(){} })
+			        ]}),
+	});
+	oTableRates.addColumn(window.helper.createColumn("periodNo", "Period No.", "40px", "TF")); //period item ID 1, 2, 3,
+	oTableRates.addColumn(window.helper.createColumn("subperiodNo", "Sub Period No", "40px", "TF")); // sub period , e.g. different rates for each month within year
+	oTableRates.addColumn(window.helper.createColumn("duration", "Duration", "40px", "TF")); // Duration ( enter either duration, dates auto-calculated)
+	oTableRates.addColumn(window.helper.createColumn("durationTimeUnit", "Duration Time Unit", "40px", "TF")); // Days/Months
+	oTableRates.addColumn(window.helper.createColumn("fromDate", "From Date", "40px", "TV")); // from date auto-calculated
+	oTableRates.addColumn(window.helper.createColumn("toDate", "To Date", "40px", "TF")); // or enter to-date or duration
+	oTableRates.addColumn(window.helper.createColumn("rate", "Rate", "40px", "TF")); // give direct rate
+	// OR specify an index
+	oTableRates.addColumn(window.helper.createColumn("indexID", "Index", "40px", "TF"));
+	oTableRates.addColumn(window.helper.createColumn("indexPercent", "Index Percent", "40px", "TF")); //a percentage of the index (if applicable)
+	oTableRates.addColumn(window.helper.createColumn("indexFloor", "Index Floor", "40px", "TF"));//If the index amount drops below the agreed index floor amount - the floor amount is to be paid.
+	oTableRates.addColumn(window.helper.createColumn("indexRoof", "Index Roof", "40px", "TF"));//f the index about rises above the agreed index roof amount - the roof amount is to be paid. 
+	oTableRates.addColumn(window.helper.createColumn("indexSplitPercent", "Index Split Percent", "40px", "TF"));//If the index amount drops below the agreed index floor amount - the amount is split between parties. 
+
+	
+	var oPanelPeriods = new sap.ui.commons.Panel({
 		width : "100%"
 	});
-	oPanelLaytime.setText("Laytime");
-	var oButtonLaytime = 		new sap.ui.commons.Button({
-		text : "Laytime Calculation",
-		//lite : true,
-		style: sap.ui.commons.ButtonStyle.Emph,
-		press: function() { }
-	});
-	oButtonLaytime.addStyleClass("myGraphBtn");
-	oPanelLaytime.addButton( oButtonLaytime);
-	oPanelLaytime.addContent(oTableLaycan);
+	oPanelPeriods.setText("Duration & Rates");
 
+	oPanelPeriods.addContent(oTablePeriod);
+	oPanelPeriods.addContent(oTableRates);
 //////////////////////////////////////////Table for Partner//////////////////////////////////////////////////
 	//Create an instance of the table control
-	var oTablePartner = window.helper.createTable({
+	var oTableProfit = window.helper.createTable({
+		title: "Profit Sharing",
 		visibleRowCount: 2,
 		toolbar: new sap.ui.commons.Toolbar({
 			items: [ 
 			        new sap.ui.commons.Button({text: "Add",style: sap.ui.commons.ButtonStyle.Accept, press: function(){} }),
-			        new sap.ui.commons.Button({text: "Edit",style: sap.ui.commons.ButtonStyle.Accept,  press: function(){} }),
 			        new sap.ui.commons.Button({text: "Delete",style: sap.ui.commons.ButtonStyle.Reject,  press: function(){} })
 			        ]}),
 	});
 
-	oTablePartner.addColumn(window.helper.createColumn("functn", "Function", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("partnerNo", "Partner No.", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("partnerName", "Partner Name", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("partnerCity", "Partner City", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("partnerPos", "Partner Position", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("partnerCty", "Partner Country", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("bankKey", "Bank Key", "40px", "TF"));
-	oTablePartner.addColumn(window.helper.createColumn("bankAcct", "Back Account", "40px", "TF"));
+	oTableProfit.addColumn(window.helper.createColumn("BU", "Business Unit", "40px", "TF")); //name of the business unit entering into profit share
+	oTableProfit.addColumn(window.helper.createColumn("company", "Company", "40px", "TF")); //name of the legal entity entering into the  profit share
+	oTableProfit.addColumn(window.helper.createColumn("percent", "Share(%)", "40px", "TF")); //profit share dividend (in per cent) 
 
-	var aDataPartner = [
-	                    { functn:"SP", partnerNo: "123", partnerName: "ADNOC Grp", partnerCity:"Abu Dhabi", 
-	                    	partnerPos: "SW1E 5JL", partnerCty:"", bankKey:""},
-	                    	{ functn:"BO", partnerNo: "345", partnerName: "IFCHOR FA", partnerCity:"LUASANNE", 
-	                    		partnerPos: "1003", partnerCty:"Switzerland", bankKey:""},
-
-	                    		];
 	var oModelPartner = new sap.ui.model.json.JSONModel();
-	oModelPartner.setData({modelData: aDataPartner});
-	oTablePartner.setModel(oModelPartner);
-	oTablePartner.bindRows("/modelData");
+	/*oModelPartner.setData({modelData: aDataPartner});
+	oTableProfit.setModel(oModelPartner);
+	oTableProfit.bindRows("/modelData");*/
 
 
-	var oPanelPartner = new sap.ui.commons.Panel({
+	var oPanelProfit = new sap.ui.commons.Panel({
 		width : "100%"
 	});
-	oPanelPartner.setText("Partner");
+	oPanelProfit.setText("Other Details");
 
-	oPanelPartner.addContent(oTablePartner);
-
+	var oMatrixMisc = new sap.ui.commons.layout.MatrixLayout({
+		//id:"MatrixContractTC",
+		layoutFixed : true,
+		width : '100%',
+		columns: 3
+	});
+	oMatrixMisc.createRow(oTableDelNotice,oTableReNotice,oTableProfit);
+	oPanelProfit.addContent(oMatrixMisc);
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Create a matrix layout
 	var oMatrix = new sap.ui.commons.layout.MatrixLayout({
@@ -496,8 +561,8 @@ var contractTC = function(){
 	oMatrix.createRow(oSimpleForm);
 
 	oMatrix.createRow(oSFDelivery);
-	oMatrix.createRow(oPanelLaytime);
-	oMatrix.createRow(oPanelPartner);
+	oMatrix.createRow(oPanelPeriods);
+	oMatrix.createRow(oPanelProfit);
 	return oMatrix;
 };
 
